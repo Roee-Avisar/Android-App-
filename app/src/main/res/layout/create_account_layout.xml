@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    android:background="#F5F5F5"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="CreateAccountFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Create Account"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#444444"
+            android:layout_marginBottom="16dp"
+            android:gravity="center" />
+
+        <ImageView
+            android:id="@+id/profile_image"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="16dp"
+            android:src="@mipmap/ic_launcher_round"
+            android:background="#DDDDDD"
+            android:scaleType="centerCrop"
+            android:elevation="4dp" />
+
+        <Button
+            android:id="@+id/upload_image_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Upload Image"
+            android:layout_gravity="center"
+            android:backgroundTint="#6495ED"
+            android:textColor="#FFFFFF" />
+
+        <EditText
+            android:id="@+id/first_name_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="First Name"
+            android:layout_marginTop="16dp"
+            android:background="#FFFFFF"
+            android:padding="10dp"
+            android:elevation="2dp" />
+
+        <EditText
+            android:id="@+id/last_name_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Last Name"
+            android:layout_marginTop="12dp"
+            android:background="#FFFFFF"
+            android:padding="10dp"
+            android:elevation="2dp" />
+
+        <EditText
+            android:id="@+id/initial_budget_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Initial Budget"
+            android:layout_marginTop="12dp"
+            android:inputType="numberDecimal"/>
+
+        <Button
+            android:id="@+id/save_user_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Save User"
+            android:layout_marginTop="200dp"
+            android:textStyle="bold"
+            android:backgroundTint="#6495ED"
+            android:textColor="#FFFFFF"
+            android:padding="12dp"
+            />
+
+    </LinearLayout>
+</ScrollView>
+

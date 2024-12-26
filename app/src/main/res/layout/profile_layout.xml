@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    android:background="#F5F5F5"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="ProfileFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/profile_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="User Name"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#444444"
+            android:gravity="center"
+            android:layout_marginBottom="16dp" />
+
+        <ImageView
+            android:id="@+id/profile_image"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="16dp"
+            android:src="@mipmap/ic_launcher_round"
+            android:background="#DDDDDD"
+            android:scaleType="centerCrop"
+            android:elevation="4dp"
+            />
+
+        <!-- סכום כולל -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total Budget:"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#444444" />
+
+            <TextView
+                android:id="@+id/total_budget_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0.00"
+                android:textSize="18sp"
+                android:layout_marginStart="8dp"
+                android:textColor="#4CAF50" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="16dp">
+
+            <!-- הכנסות -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Income:"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#4CAF50"
+                android:layout_marginEnd="16dp" />
+
+            <TextView
+                android:id="@+id/income_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0.00"
+                android:textSize="18sp"
+                android:textColor="#4CAF50"
+                android:layout_marginEnd="32dp" />
+
+            <!-- הוצאות -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Expense:"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#F44336"
+                android:layout_marginEnd="16dp" />
+
+            <TextView
+                android:id="@+id/expense_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0.00"
+                android:textSize="18sp"
+                android:textColor="#F44336" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/update_budget_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="#6495ED"
+            android:padding="12dp"
+            android:text="Update Budget"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold" />
+    </LinearLayout>
+</ScrollView>

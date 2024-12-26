@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_xml"
+    app:startDestination="@id/addItemFragment">
+    <fragment
+        android:id="@+id/addItemFragment"
+        android:name="com.example.budgetmanager.AddItemFragment"
+        android:label="add_item_layout"
+        tools:layout="@layout/add_item_layout" >
+        <action
+            android:id="@+id/action_addItemFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createAccountFragment"
+        android:name="com.example.budgetmanager.CreateAccountFragment"
+        android:label="create_account_layout"
+        tools:layout="@layout/create_account_layout" >
+        <action
+            android:id="@+id/action_createAccountFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.budgetmanager.ProfileFragment"
+        android:label="profile_layout"
+        tools:layout="@layout/profile_layout" >
+        <action
+            android:id="@+id/action_profileFragment_to_addItemFragment"
+            app:destination="@id/addItemFragment" />
+    </fragment>
+</navigation>
