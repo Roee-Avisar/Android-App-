@@ -12,6 +12,9 @@
         <action
             android:id="@+id/action_addItemFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_addItemFragment_to_allItemsFragment"
+            app:destination="@id/allItemsFragment" />
     </fragment>
     <fragment
         android:id="@+id/createAccountFragment"
@@ -20,7 +23,11 @@
         tools:layout="@layout/create_account_layout" >
         <action
             android:id="@+id/action_createAccountFragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
+            app:destination="@id/profileFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -29,6 +36,15 @@
         tools:layout="@layout/profile_layout" >
         <action
             android:id="@+id/action_profileFragment_to_addItemFragment"
+            app:destination="@id/addItemFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/allItemsFragment"
+        android:name="com.example.budgetmanager.AllItemsFragment"
+        android:label="all_item_layout"
+        tools:layout="@layout/all_item_layout" >
+        <action
+            android:id="@+id/action_allItemsFragment_to_addItemFragment"
             app:destination="@id/addItemFragment" />
     </fragment>
 </navigation>
