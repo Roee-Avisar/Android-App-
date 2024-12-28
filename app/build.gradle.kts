@@ -1,21 +1,25 @@
+import org.jetbrains.kotlin.storage.CacheResetOnProcessCanceled.enabled
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
 }
 
+
 android {
     namespace = "com.example.budgetmanager"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.budgetmanager"
-        minSdk = 24
+        minSdk = 21
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
+
 
     buildTypes {
         release {
@@ -33,9 +37,17 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+
+    buildFeatures {
+        viewBinding = true
+    }
+
+
 }
 
 dependencies {
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.1")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.1")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -48,3 +60,5 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 }
+
+

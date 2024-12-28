@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_xml"
-    app:startDestination="@id/addItemFragment">
+    app:startDestination="@id/createAccountFragment">
     <fragment
         android:id="@+id/addItemFragment"
         android:name="com.example.budgetmanager.AddItemFragment"
