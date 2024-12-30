@@ -67,19 +67,54 @@
         android:inputType="numberDecimal"
         android:textSize="18sp"
         android:background="#FFFFFF"
-        android:padding="10dp"
-        android:elevation="2dp" />
+        android:padding="10dp" />
 
     <EditText
         android:id="@+id/description_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="12dp"
         android:hint="Description"
         android:inputType="text"
         android:textSize="18sp"
         android:background="#FFFFFF"
         android:padding="10dp"/>
+
+    <EditText
+        android:id="@+id/date_picker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:hint="Select Date"
+        android:inputType="text"
+        android:textSize="18sp"
+        android:background="#FFFFFF"
+        android:padding="10dp" />
+
+    <Button
+        android:id="@+id/take_photo_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="Take Photo"
+        android:layout_gravity="center"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:backgroundTint="#6495ED"
+        android:textColor="#FFFFFF"
+        android:padding="12dp" />
+
+    <ImageView
+        android:id="@+id/selected_image"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="16dp"
+        android:scaleType="centerCrop"
+        android:background="#E0E0E0"
+        android:contentDescription="Selected Image Placeholder" />
+
+
 
     <Button
         android:id="@+id/confirm_transaction_button"

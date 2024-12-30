@@ -10,7 +10,9 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.example.budgetmanager.Tables.Profile
 import com.example.budgetmanager.databinding.CreateAccountLayoutBinding
 
 
@@ -20,6 +22,7 @@ class CreateAccountFragment : Fragment() {
     private val binding get() = _binding!!
 
     private var imageUri : Uri? = null
+    private val userProfileViewModel: UserProfileModelView by activityViewModels()
 
     private val pickImageLauncher : ActivityResultLauncher<Array<String>> =
         registerForActivityResult(ActivityResultContracts.OpenDocument()){
@@ -40,38 +43,40 @@ class CreateAccountFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Set up listeners using binding
+
         binding.uploadImageButton.setOnClickListener {
-            // Placeholder: Implement image upload logic
-//            Toast.makeText(requireContext(), "Upload Image Clicked", Toast.LENGTH_SHORT).show()
-
-                pickImageLauncher.launch(arrayOf("image/*"))
+            pickImageLauncher.launch(arrayOf("image/*"))
         }
-
         binding.saveUserButton.setOnClickListener {
             val firstName = binding.firstNameInput.text.toString().trim()
             val lastName = binding.lastNameInput.text.toString().trim()
-            val initialBudget = binding.initialBudgetInput.text.toString().trim()
+            val initialBudgetString = binding.initialBudgetInput.text.toString().trim()
 
-            // Validate input
-            if (firstName.isEmpty() || lastName.isEmpty() || initialBudget.isEmpty()) {
-                Toast.makeText(requireContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show()
-            } else {
-                // Placeholder: Save user data logic
-//                Toast.makeText(
-//                    requireContext(),
-//                    "User Saved: $firstName $lastName, Budget: $initialBudget",
-//                    Toast.LENGTH_LONG
-//                ).show()
-                val bundle = Bundle().apply {
-                    putString("firstName", firstName)
-                    putString("lastName", lastName)
-                    putString("initialBudget", initialBudget)
-                    imageUri?.let { putString("imageUri", it.toString()) }
-                }
-                findNavController().navigate(R.id.action_createAccountFragment_to_profileFragment, bundle)
+            if (firstName.isEmpty() || lastName.isEmpty()) {
+                Toast.makeText(requireContext(), "Please fill in all fields", Toast.LENGTH_SHORT)
+                    .show()
+                return@setOnClickListener
             }
 
+            val initialBudget = initialBudgetString.toDoubleOrNull()
+            if (initialBudget == null) {
+                Toast.makeText(requireContext(), "Please enter a valid budget", Toast.LENGTH_SHORT)
+                    .show()
+                return@setOnClickListener
+            }
+
+            val userProfile =
+                Profile(
+                    firstName = firstName,
+                    lastName = lastName,
+                    initialBudget = initialBudget,
+                    imageUri = imageUri?.toString()
+                )
+            userProfileViewModel.saveUserProfile(userProfile)
+
+            Toast.makeText(requireContext(), "Profile created successfully!", Toast.LENGTH_SHORT)
+                .show()
+            findNavController().navigate(R.id.action_createAccountFragment_to_profileFragment)
         }
     }
 
@@ -80,3 +85,4 @@ class CreateAccountFragment : Fragment() {
         _binding = null
     }
 }
+

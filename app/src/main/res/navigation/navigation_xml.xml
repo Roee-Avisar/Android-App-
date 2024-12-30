@@ -37,6 +37,12 @@
         <action
             android:id="@+id/action_profileFragment_to_addItemFragment"
             app:destination="@id/addItemFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_createAccountFragment"
+            app:destination="@id/createAccountFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_allItemsFragment"
+            app:destination="@id/allItemsFragment" />
     </fragment>
     <fragment
         android:id="@+id/allItemsFragment"
@@ -46,5 +52,17 @@
         <action
             android:id="@+id/action_allItemsFragment_to_addItemFragment"
             app:destination="@id/addItemFragment" />
+        <action
+            android:id="@+id/action_allItemsFragment_to_descriptionFragment"
+            app:destination="@id/descriptionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/descriptionFragment"
+        android:name="com.example.budgetmanager.DescriptionFragment"
+        android:label="item_description_layout"
+        tools:layout="@layout/item_description_layout" >
+        <action
+            android:id="@+id/action_descriptionFragment_to_allItemsFragment"
+            app:destination="@id/allItemsFragment" />
     </fragment>
 </navigation>
