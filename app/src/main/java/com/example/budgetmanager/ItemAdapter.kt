@@ -4,6 +4,7 @@ import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.budgetmanager.Tables.Item
 import com.example.budgetmanager.databinding.AddItemLayoutBinding
@@ -43,6 +44,13 @@ class ItemAdapter(val items: List<Item>, val callBack: ItemListener)
             } else {
                 binding.itemImage.setImageResource(R.drawable.ic_launcher_background) // תמונת ברירת מחדל
             }
+
+            val color = if (item.isExpense) {
+                ContextCompat.getColor(binding.root.context, R.color.red)
+            } else {
+                ContextCompat.getColor(binding.root.context, R.color.green)
+            }
+            binding.itemCardView.setCardBackgroundColor(color)
         }
     }
 

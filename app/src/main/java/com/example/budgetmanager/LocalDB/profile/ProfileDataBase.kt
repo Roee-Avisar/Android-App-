@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.budgetmanager.Tables.Profile
 
-@Database(entities = [Profile::class], version = 1, exportSchema = false)
+@Database(entities = [Profile::class], version = 2, exportSchema = false)
 abstract class ProfileDataBase : RoomDatabase() {
 
     abstract fun profileDao(): ProfileDao
@@ -22,7 +22,9 @@ abstract class ProfileDataBase : RoomDatabase() {
                 ProfileDataBase::class.java,
                 "profile_db"
             )
-                .allowMainThreadQueries().build()
+                .fallbackToDestructiveMigration()
+                .allowMainThreadQueries()
+                .build()
         }
     }
 

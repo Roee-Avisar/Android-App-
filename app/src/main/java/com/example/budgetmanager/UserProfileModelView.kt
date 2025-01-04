@@ -15,7 +15,7 @@ class UserProfileModelView(application: Application) : AndroidViewModel(applicat
 
     val profileLiveData: LiveData<Profile?>? = repository.getUserProfileLive()
 
-    fun saveUserProfile(profile: Profile) {
+    fun insertUserProfile(profile: Profile) {
         repository.insertUserProfile(profile)
     }
 
@@ -27,5 +27,16 @@ class UserProfileModelView(application: Application) : AndroidViewModel(applicat
         return repository.getUserProfile()
     }
 
+    fun updateBudget(amount: Double, isExpense: Boolean) {
+        val currentProfile = repository.getUserProfile()
+        if (currentProfile != null) {
+            if (isExpense) {
+                currentProfile.initialBudget -= amount
+            } else {
+                currentProfile.initialBudget += amount
+            }
+            repository.insertUserProfile(currentProfile)
+        }
+    }
 
 }

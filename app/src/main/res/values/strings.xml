@@ -1,3 +1,26 @@
 <resources>
     <string name="app_name">Budget manager</string>
+    <string name="current_budget">Current Budget:</string>
+    <string name="_0_00">0.00</string>
+    <string name="income">Income</string>
+    <string name="expense">Expense</string>
+    <string name="enter_amount">Enter Amount</string>
+    <string name="description">Description</string>
+    <string name="select_date">Select Date</string>
+    <string name="add_photo">Add Photo</string>
+    <string name="selected_image_placeholder">Selected Image Placeholder</string>
+    <string name="confirm">Confirm</string>
+    <string name="create_account">Create Account</string>
+    <string name="upload_image">Upload Image</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="initial_budget">Initial Budget</string>
+    <string name="save_user">Save User</string>
+    <string name="item_description">Item description</string>
+    <string name="item_detailed_amount">Item detailed amount</string>
+    <string name="date">Date</string>
+    <string name="user_name">User Name</string>
+    <string name="total_budget">Total Budget:</string>
+    <string name="update_budget">Update Budget</string>
+    <string name="watch_all_the_budget_updates">Watch all the Budget updates</string>
 </resources>

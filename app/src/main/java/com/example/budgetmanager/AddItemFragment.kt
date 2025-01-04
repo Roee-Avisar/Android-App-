@@ -4,6 +4,8 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -36,7 +38,6 @@ class AddItemFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         _binding = AddItemLayoutBinding.inflate(inflater,container,false)
         return binding.root
     }
@@ -71,7 +72,7 @@ class AddItemFragment : Fragment() {
             val amountText = binding.amountInput.text.toString().trim()
             val description = binding.descriptionInput.text.toString().trim()
             val date = binding.datePicker.text.toString()
-
+            val isExpense = binding.expenseRadio.isChecked
             if (amountText.isEmpty() || description.isEmpty() || date.isEmpty()) {
                 Toast.makeText(requireContext(), "Please fill in all fields", Toast.LENGTH_SHORT)
                     .show()
@@ -82,9 +83,10 @@ class AddItemFragment : Fragment() {
                         amount = amount,
                         description = description,
                         date = date,
-                        photo = imageUri?.toString()
+                        photo = imageUri?.toString(),
+                        isExpense = isExpense
                     )
-                    viewModel.addItem(item) // קריאה ל-ViewModel
+                    viewModel.addItem(item, isExpense) // קריאה ל-ViewModel
                     Toast.makeText(requireContext(), "Item added successfully", Toast.LENGTH_SHORT)
                         .show()
                     findNavController().navigate(R.id.action_addItemFragment_to_allItemsFragment)

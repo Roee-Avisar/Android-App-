@@ -4,13 +4,15 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.budgetmanager.LocalDB.profile.ProfileDao
 import com.example.budgetmanager.Tables.Item
+import com.example.budgetmanager.Tables.Profile
 
-@Database(entities = arrayOf(Item::class), version = 2, exportSchema = false)
+@Database(entities = [Item::class, Profile::class], version = 2)
 abstract class ItemDataBase : RoomDatabase() {
 
     abstract fun itemDao(): ItemDao
-
+    abstract fun profileDao(): ProfileDao
     companion object {
 
         @Volatile

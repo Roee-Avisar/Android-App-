@@ -5,13 +5,11 @@ import androidx.room.Entity
 
 @Entity(tableName = "user_profile_table")
 data class Profile(
-    @PrimaryKey(autoGenerate = false)
+    @PrimaryKey(autoGenerate = true)
     val id : Int = 1,
-
-
     val firstName : String,
     val lastName : String,
-    val initialBudget : Double,
+    var initialBudget : Double,
     val imageUri : String? = null
 
 )

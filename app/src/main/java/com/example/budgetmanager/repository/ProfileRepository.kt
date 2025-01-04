@@ -31,4 +31,16 @@ class ProfileRepository(application: Application) {
         return profileDao?.getUserProfileLive() ?: MutableLiveData(null)
     }
 
+    fun updateBudget(amount: Double, isExpense: Boolean) {
+        val currentProfile = profileDao?.getUserProfile()
+        if (currentProfile != null) {
+            if (isExpense) {
+                currentProfile.initialBudget -= amount
+            } else {
+                currentProfile.initialBudget += amount
+            }
+            profileDao?.insertUserProfile(currentProfile) // שימוש ב-insertUserProfile
+        }
+    }
+
 }

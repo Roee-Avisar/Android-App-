@@ -2,9 +2,13 @@ package com.example.budgetmanager
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -25,6 +29,7 @@ class AllItemsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        setHasOptionsMenu(true)
         _binding = AllItemLayoutBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -69,6 +74,45 @@ class AllItemsFragment : Fragment() {
                 viewModel.deleteItem(item)
             }
         }).attachToRecyclerView(binding.recycler)
+
+
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.main_menu,menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_delete -> {
+                showDeleteConfirmationDialog()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        val exitIcon = menu.findItem(R.id.action_exit)
+        exitIcon.isVisible = false
+        super.onPrepareOptionsMenu(menu)
+    }
+
+
+
+    private fun showDeleteConfirmationDialog() {
+        AlertDialog.Builder(requireContext())
+            .setTitle("Delete All Items")
+            .setMessage("Are you sure you want to delete all items?")
+            .setPositiveButton("Yes") { _, _ ->
+                viewModel.deleteAll()
+                Toast.makeText(requireContext(), "All items deleted", Toast.LENGTH_SHORT).show()
+            }
+            .setNegativeButton("No", null)
+            .show()
     }
 
     override fun onDestroyView() {

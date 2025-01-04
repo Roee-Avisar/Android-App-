@@ -31,14 +31,19 @@ class DescriptionFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.chosenItem.observe(viewLifecycleOwner){
+        viewModel.chosenItem.observe(viewLifecycleOwner) {
             binding.itemDescription.text = it.description
             binding.itemValue.text = it.amount.toString()
             binding.itemDate.text = it.date
-            binding.itemPhoto.setImageURI(Uri.parse(it.photo))
+            if (!it.photo.isNullOrEmpty()) {
+                val imageUri = Uri.parse(it.photo)
+                binding.itemPhoto.setImageURI(imageUri)
+            } else {
+                binding.itemPhoto.setImageResource(R.drawable.ic_launcher_foreground)
+            }
+
+
         }
-
-
     }
 
     override fun onDestroyView() {

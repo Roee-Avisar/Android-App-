@@ -17,7 +17,7 @@
             android:id="@+id/profile_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="User Name"
+            android:text="@string/user_name"
             android:textSize="24sp"
             android:textStyle="bold"
             android:textColor="#444444"
@@ -36,7 +36,6 @@
             android:elevation="4dp"
             />
 
-        <!-- סכום כולל -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -47,7 +46,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Total Budget:"
+                android:text="@string/total_budget"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:textColor="#444444" />
@@ -69,7 +68,6 @@
             android:gravity="center"
             android:layout_marginBottom="16dp">
 
-            <!-- הכנסות -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -114,7 +112,7 @@
             android:layout_marginTop="24dp"
             android:backgroundTint="#6495ED"
             android:padding="12dp"
-            android:text="Update Budget"
+            android:text="@string/update_budget"
             android:textColor="#FFFFFF"
             android:textStyle="bold" />
 
@@ -125,7 +123,7 @@
             android:layout_marginTop="24dp"
             android:backgroundTint="#6495ED"
             android:padding="12dp"
-            android:text="Watch all the Budget updates"
+            android:text="@string/watch_all_the_budget_updates"
             android:textColor="#FFFFFF"
             android:textStyle="bold" />
     </LinearLayout>

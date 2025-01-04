@@ -21,7 +21,11 @@ data class Item(
     val date: String,
 
     @ColumnInfo(name = "image")
-    val photo: String? = null) : Parcelable {
+    val photo: String? = null,
+
+    @ColumnInfo(name = "is_expense")
+    val  isExpense : Boolean)
+    : Parcelable {
 
     @PrimaryKey(autoGenerate = true)
     var id : Int = 0

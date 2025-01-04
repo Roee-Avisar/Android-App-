@@ -8,5 +8,17 @@
         android:icon="@drawable/baseline_close_24"
         app:showAsAction="always"/>
 
+    <item
+        android:id="@+id/action_delete"
+        android:title="Delete all"
+        android:icon="@drawable/baseline_delete_24"
+        app:showAsAction="always"/>
+
+<!--    <item-->
+<!--        android:id="@+id/action_return"-->
+<!--        android:title="Return"-->
+<!--        android:icon="@drawable/baseline_arrow_circle_left_24"-->
+<!--        app:showAsAction="always"/>-->
+
 
 </menu>

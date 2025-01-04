@@ -50,11 +50,11 @@
         android:label="all_item_layout"
         tools:layout="@layout/all_item_layout" >
         <action
-            android:id="@+id/action_allItemsFragment_to_addItemFragment"
-            app:destination="@id/addItemFragment" />
-        <action
             android:id="@+id/action_allItemsFragment_to_descriptionFragment"
             app:destination="@id/descriptionFragment" />
+        <action
+            android:id="@+id/action_allItemsFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/descriptionFragment"

@@ -72,7 +72,7 @@ class CreateAccountFragment : Fragment() {
                     initialBudget = initialBudget,
                     imageUri = imageUri?.toString()
                 )
-            userProfileViewModel.saveUserProfile(userProfile)
+            userProfileViewModel.insertUserProfile(userProfile)
 
             Toast.makeText(requireContext(), "Profile created successfully!", Toast.LENGTH_SHORT)
                 .show()

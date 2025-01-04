@@ -2,30 +2,49 @@ package com.example.budgetmanager
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import com.example.budgetmanager.repository.ProfileRepository
+
 class MainActivity : AppCompatActivity() {
 
     private lateinit var userProfileViewModel: UserProfileModelView
     private lateinit var navController: NavController
+    private lateinit var profileRepository: ProfileRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
+        // הגדרת Toolbar
+        val toolbar: androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+
+        // קבלת NavController
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         navController = navHostFragment.navController
 
-        userProfileViewModel = ViewModelProvider(this)[UserProfileModelView::class.java]
+        // התאמת Toolbar ל-Navigation Component
+        val appBarConfiguration = AppBarConfiguration(navController.graph)
+        setupActionBarWithNavController(navController, appBarConfiguration)
 
-        val userProfile = userProfileViewModel.getUserProfile()
-        if (userProfile != null) {
-            navController.navigate(R.id.profileFragment)
-        } else {
+        // בדיקת פרופיל קיים וניווט למסך המתאים
+        profileRepository = ProfileRepository(application)
+        val existingProfile = profileRepository.getUserProfile()
+
+        if (existingProfile == null) {
             navController.navigate(R.id.createAccountFragment)
+        } else {
+            navController.navigate(R.id.profileFragment)
         }
-
     }
+
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp() || super.onSupportNavigateUp()
+    }
+
 }
 
