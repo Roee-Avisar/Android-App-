@@ -53,14 +53,15 @@ class CreateAccountFragment : Fragment() {
             val initialBudgetString = binding.initialBudgetInput.text.toString().trim()
 
             if (firstName.isEmpty() || lastName.isEmpty()) {
-                Toast.makeText(requireContext(), "Please fill in all fields", Toast.LENGTH_SHORT)
+                Toast.makeText(requireContext(), R.string.please_fill_in_all_fields, Toast.LENGTH_SHORT)
                     .show()
                 return@setOnClickListener
             }
 
             val initialBudget = initialBudgetString.toDoubleOrNull()
             if (initialBudget == null) {
-                Toast.makeText(requireContext(), "Please enter a valid budget", Toast.LENGTH_SHORT)
+                Toast.makeText(requireContext(),
+                    getString(R.string.please_enter_a_valid_budget), Toast.LENGTH_SHORT)
                     .show()
                 return@setOnClickListener
             }
@@ -74,7 +75,8 @@ class CreateAccountFragment : Fragment() {
                 )
             userProfileViewModel.insertUserProfile(userProfile)
 
-            Toast.makeText(requireContext(), "Profile created successfully!", Toast.LENGTH_SHORT)
+            Toast.makeText(requireContext(),
+                getString(R.string.profile_created_successfully), Toast.LENGTH_SHORT)
                 .show()
             findNavController().navigate(R.id.action_createAccountFragment_to_profileFragment)
         }

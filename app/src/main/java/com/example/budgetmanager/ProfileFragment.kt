@@ -47,7 +47,7 @@ class ProfileFragment : Fragment() {
             } else {
                 Toast.makeText(
                     requireContext(),
-                    "No profile found.",
+                    getString(R.string.no_profile_found),
                     Toast.LENGTH_SHORT
                 ).show()
                 findNavController().navigate(R.id.createAccountFragment)
@@ -61,7 +61,8 @@ class ProfileFragment : Fragment() {
                 }
                 findNavController().navigate(R.id.action_profileFragment_to_addItemFragment, bundle)
             }else{
-                Toast.makeText(requireContext(), "No budget available", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(),
+                    getString(R.string.no_budget_available), Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -84,13 +85,13 @@ class ProfileFragment : Fragment() {
 
     private fun showExitProfileConfirmationDialog() {
         AlertDialog.Builder(requireContext())
-            .setTitle("Exit this profile")
-            .setMessage("Are you sure you want to exit your profile ? all the data will be deleted")
-            .setPositiveButton("Yes") { _, _ ->
+            .setTitle(getString(R.string.exit_this_profile))
+            .setMessage(getString(R.string.are_you_sure_you_want_to_exit_your_profile_all_the_data_will_be_deleted))
+            .setPositiveButton(R.string.yes) { _, _ ->
                 userProfileViewModel.deleteUserProfile()
-                Toast.makeText(requireContext(), "All items deleted", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), R.string.all_items_deleted, Toast.LENGTH_SHORT).show()
             }
-            .setNegativeButton("No", null)
+            .setNegativeButton(R.string.no, null)
             .show()
     }
 

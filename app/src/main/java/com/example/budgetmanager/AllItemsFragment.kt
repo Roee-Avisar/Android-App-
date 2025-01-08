@@ -43,7 +43,19 @@ class AllItemsFragment : Fragment() {
             if (items != null) {
                 binding.recycler.adapter = ItemAdapter(items, object : ItemAdapter.ItemListener {
                     override fun onItemClicked(index: Int) {
-                        Toast.makeText(requireContext(), "Clicked on: ${items[index].description}", Toast.LENGTH_SHORT).show()
+                        if (index in items.indices) {
+                            Toast.makeText(
+                                requireContext(),
+                                getString(R.string.clicked_on, items[index].description),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        } else {
+                            Toast.makeText(
+                                requireContext(),
+                                getString(R.string.invalid_item),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
                     }
 
                     override fun onItemLongClick(index: Int) {
@@ -105,13 +117,14 @@ class AllItemsFragment : Fragment() {
 
     private fun showDeleteConfirmationDialog() {
         AlertDialog.Builder(requireContext())
-            .setTitle("Delete All Items")
-            .setMessage("Are you sure you want to delete all items?")
-            .setPositiveButton("Yes") { _, _ ->
+            .setTitle(getString(R.string.delete_all_items))
+            .setMessage(getString(R.string.are_you_sure_you_want_to_delete_all_items))
+            .setPositiveButton(getString(R.string.yes)) { _, _ ->
                 viewModel.deleteAll()
-                Toast.makeText(requireContext(), "All items deleted", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(),
+                    getString(R.string.all_items_deleted), Toast.LENGTH_SHORT).show()
             }
-            .setNegativeButton("No", null)
+            .setNegativeButton(getString(R.string.no), null)
             .show()
     }
 

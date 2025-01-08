@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ניהול תקציב</string>
+    <string name="current_budget">תקציב נוכחי:</string>
+    <string name="income">הכנסה</string>
+    <string name="expense">הוצאה</string>
+    <string name="enter_amount">הזן סכום</string>
+    <string name="description">תאור</string>
+    <string name="select_date">בחירת תאריך</string>
+    <string name="add_photo">הוספת תמונה</string>
+    <string name="confirm">אישור</string>
+    <string name="create_account">יצירת חשבון</string>
+    <string name="upload_image">העלאת תמונה</string>
+    <string name="first_name">שם פרטי</string>
+    <string name="last_name">שם משפחה</string>
+    <string name="initial_budget">תקציב ראשוני</string>
+    <string name="save_user">שמור משתמש</string>
+    <string name="item_description">תיאור הפריט</string>
+    <string name="date">תאריך</string>
+    <string name="user_name">שם משתמש</string>
+    <string name="total_budget">תקציב כולל:</string>
+    <string name="update_budget">עדכון תקציב</string>
+    <string name="watch_all_the_budget_updates">צפייה בכל עידכוני תקציב</string>
+    <string name="budget_manager">ניהול תקציב</string>
+    <string name="income_profile">הכנסות:</string>
+    <string name="expense_profile">הוצאות:</string>
+    <string name="please_fill_in_all_fields">נא למלא את כל השדות</string>
+    <string name="item_added_successfully">פריט נוסף בהצלחה</string>
+    <string name="invalid_amount_format">פורמט סכום לא חוקי</string>
+    <string name="an_error_occurred">אירע שגיאה</string>
+    <string name="are_you_sure_you_want_to_exit_your_profile_all_the_data_will_be_deleted">האם אתה בטוח שאתה רוצה לצאת? כל הפריטים ימחקו</string>
+    <string name="an_error_occurred_22">אירעה שגיאה:</string>
+    <string name="clicked_on">לחצת על:  %1$s</string>
+    <string name="delete_all_items">מחק את כל הפריטים</string>
+    <string name="are_you_sure_you_want_to_delete_all_items">האם אתה בטוח שאתה רוצה למחוק את כל הפריטים?</string>
+    <string name="yes">כן</string>
+    <string name="all_items_deleted">כל הפריטים נמחקו</string>
+    <string name="no">לא</string>
+    <string name="please_enter_a_valid_budget">נא להזין תקציב חוקי</string>
+    <string name="profile_created_successfully">הפרופיל נוצר בהצלחה!</string>
+    <string name="no_profile_found">לא נמצא פרופיל.</string>
+    <string name="no_budget_available">אין תקציב זמין</string>
+    <string name="exit_this_profile">צא מפרופיל זה</string>
+    <string name="invalid_item">פריט לא תקין</string>
+</resources>

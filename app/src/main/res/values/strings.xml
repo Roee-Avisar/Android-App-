@@ -1,14 +1,14 @@
 <resources>
     <string name="app_name">Budget manager</string>
     <string name="current_budget">Current Budget:</string>
-    <string name="_0_00">0.00</string>
+    <string name="_0_00" translatable="false">0.00</string>
     <string name="income">Income</string>
     <string name="expense">Expense</string>
     <string name="enter_amount">Enter Amount</string>
     <string name="description">Description</string>
     <string name="select_date">Select Date</string>
     <string name="add_photo">Add Photo</string>
-    <string name="selected_image_placeholder">Selected Image Placeholder</string>
+    <string name="selected_image_placeholder" translatable="false">Selected Image Placeholder</string>
     <string name="confirm">Confirm</string>
     <string name="create_account">Create Account</string>
     <string name="upload_image">Upload Image</string>
@@ -17,10 +17,32 @@
     <string name="initial_budget">Initial Budget</string>
     <string name="save_user">Save User</string>
     <string name="item_description">Item description</string>
-    <string name="item_detailed_amount">Item detailed amount</string>
+    <string name="item_detailed_amount" translatable="false">Item detailed amount</string>
     <string name="date">Date</string>
     <string name="user_name">User Name</string>
     <string name="total_budget">Total Budget:</string>
     <string name="update_budget">Update Budget</string>
     <string name="watch_all_the_budget_updates">Watch all the Budget updates</string>
+    <string name="budget_manager">Budget Manager</string>
+    <string name="total_buget_number" translatable="false">0.00</string>
+    <string name="income_profile">Income:</string>
+    <string name="expense_profile">Expense:</string>
+    <string name="please_fill_in_all_fields">Please fill in all fields</string>
+    <string name="item_added_successfully">Item added successfully</string>
+    <string name="invalid_amount_format">Invalid amount format</string>
+    <string name="an_error_occurred">"An error occurred: "</string>
+    <string name="clicked_on">Clicked on:  %1$s</string>
+    <string name="delete_all_items">Delete All Items</string>
+    <string name="are_you_sure_you_want_to_delete_all_items">Are you sure you want to delete all items?</string>
+    <string name="yes">Yes</string>
+    <string name="all_items_deleted">All items deleted</string>
+    <string name="no">No</string>
+    <string name="please_enter_a_valid_budget">Please enter a valid budget</string>
+    <string name="profile_created_successfully">Profile created successfully!</string>
+    <string name="no_profile_found">No profile found.</string>
+    <string name="no_budget_available">No budget available</string>
+    <string name="exit_this_profile">Exit this profile</string>
+    <string name="are_you_sure_you_want_to_exit_your_profile_all_the_data_will_be_deleted">Are you sure you want to exit your profile ? all the data will be deleted</string>
+    <string name="an_error_occurred_22">An error occurred:</string>
+    <string name="invalid_item">invalid item</string>
 </resources>

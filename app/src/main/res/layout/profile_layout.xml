@@ -55,7 +55,7 @@
                 android:id="@+id/total_budget_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0.00"
+                android:text="@string/total_buget_number"
                 android:textSize="18sp"
                 android:layout_marginStart="8dp"
                 android:textColor="#4CAF50" />
@@ -71,7 +71,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Income:"
+                android:text="@string/income_profile"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:textColor="#4CAF50"
@@ -90,7 +90,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Expense:"
+                android:text="@string/expense_profile"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:textColor="#F44336"

@@ -74,7 +74,8 @@ class AddItemFragment : Fragment() {
             val date = binding.datePicker.text.toString()
             val isExpense = binding.expenseRadio.isChecked
             if (amountText.isEmpty() || description.isEmpty() || date.isEmpty()) {
-                Toast.makeText(requireContext(), "Please fill in all fields", Toast.LENGTH_SHORT)
+                Toast.makeText(requireContext(),
+                    getString(R.string.please_fill_in_all_fields), Toast.LENGTH_SHORT)
                     .show()
             } else {
                 try {
@@ -87,16 +88,18 @@ class AddItemFragment : Fragment() {
                         isExpense = isExpense
                     )
                     viewModel.addItem(item, isExpense) // קריאה ל-ViewModel
-                    Toast.makeText(requireContext(), "Item added successfully", Toast.LENGTH_SHORT)
+                    Toast.makeText(requireContext(),
+                        getString(R.string.item_added_successfully), Toast.LENGTH_SHORT)
                         .show()
                     findNavController().navigate(R.id.action_addItemFragment_to_allItemsFragment)
                 } catch (e: NumberFormatException) {
-                    Toast.makeText(requireContext(), "Invalid amount format", Toast.LENGTH_SHORT)
+                    Toast.makeText(requireContext(),
+                        getString(R.string.invalid_amount_format), Toast.LENGTH_SHORT)
                         .show()
                 } catch (e: Exception) {
                     Toast.makeText(
                         requireContext(),
-                        "An error occurred: ${e.message}",
+                        getString(R.string.an_error_occurred_22, e.message),
                         Toast.LENGTH_SHORT
                     ).show()
                 }
