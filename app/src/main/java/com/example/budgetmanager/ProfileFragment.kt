@@ -90,6 +90,8 @@ class ProfileFragment : Fragment() {
             .setPositiveButton(R.string.yes) { _, _ ->
                 userProfileViewModel.deleteUserProfile()
                 Toast.makeText(requireContext(), R.string.all_items_deleted, Toast.LENGTH_SHORT).show()
+
+                findNavController().navigate(R.id.createAccountFragment)
             }
             .setNegativeButton(R.string.no, null)
             .show()

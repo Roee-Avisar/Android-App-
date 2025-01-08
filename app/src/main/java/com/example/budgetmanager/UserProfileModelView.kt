@@ -3,39 +3,50 @@ package com.example.budgetmanager
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.budgetmanager.Tables.Profile
+import com.example.budgetmanager.repository.ItemsRepository
 import com.example.budgetmanager.repository.ProfileRepository
 
 
 class UserProfileModelView(application: Application) : AndroidViewModel(application) {
 
-    private val repository = ProfileRepository(application)
-    val userProfileLiveData: LiveData<Profile?> = repository.getUserProfileLive()!!
+    private val ProfileRepository = ProfileRepository(application)
+    private val ItemRepository = ItemsRepository(application)
 
+    private val _userProfileLiveData = MutableLiveData<Profile?>()
+    val userProfileLiveData: LiveData<Profile?> get() = _userProfileLiveData
 
-    val profileLiveData: LiveData<Profile?>? = repository.getUserProfileLive()
+    init {
+        // אתחול ה-LiveData בפרופיל הנוכחי
+        _userProfileLiveData.value = ProfileRepository.getUserProfile()
+    }
 
     fun insertUserProfile(profile: Profile) {
-        repository.insertUserProfile(profile)
+        ProfileRepository.insertUserProfile(profile)
+        _userProfileLiveData.value = profile
     }
 
     fun deleteUserProfile() {
-        repository.deleteUserProfile()
+        ProfileRepository.deleteUserProfile()
+        ItemRepository.deleteAll()
+        _userProfileLiveData.value = null
     }
 
+
     fun getUserProfile(): Profile? {
-        return repository.getUserProfile()
+        return ProfileRepository.getUserProfile()
     }
 
     fun updateBudget(amount: Double, isExpense: Boolean) {
-        val currentProfile = repository.getUserProfile()
+        val currentProfile = ProfileRepository.getUserProfile()
         if (currentProfile != null) {
             if (isExpense) {
                 currentProfile.initialBudget -= amount
             } else {
                 currentProfile.initialBudget += amount
             }
-            repository.insertUserProfile(currentProfile)
+            ProfileRepository.insertUserProfile(currentProfile)
         }
     }
 

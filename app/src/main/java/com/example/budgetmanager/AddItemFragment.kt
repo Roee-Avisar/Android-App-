@@ -96,13 +96,9 @@ class AddItemFragment : Fragment() {
                     Toast.makeText(requireContext(),
                         getString(R.string.invalid_amount_format), Toast.LENGTH_SHORT)
                         .show()
-                } catch (e: Exception) {
-                    Toast.makeText(
-                        requireContext(),
-                        getString(R.string.an_error_occurred_22, e.message),
-                        Toast.LENGTH_SHORT
-                    ).show()
                 }
+
+
             }
         }
 
