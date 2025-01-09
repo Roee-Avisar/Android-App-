@@ -13,15 +13,25 @@ abstract class ItemDataBase : RoomDatabase() {
 
     abstract fun itemDao(): ItemDao
     abstract fun profileDao(): ProfileDao
+
     companion object {
 
         @Volatile
         private var instance: ItemDataBase? = null
-        fun getDataBase(context: Context) = instance ?: kotlin.synchronized(this) {
-            Room.databaseBuilder(context.applicationContext, ItemDataBase::class.java, "item_db")
-                .fallbackToDestructiveMigration()
-                .allowMainThreadQueries()
-                .build()
+
+        fun getDataBase(context: Context): ItemDataBase {
+            return instance ?: synchronized(this) {
+                val tempInstance = Room.databaseBuilder(
+                    context.applicationContext,
+                    ItemDataBase::class.java,
+                    "item_db"
+                )
+                    .fallbackToDestructiveMigration()  // Consider defining migrations for production
+                    .build()
+
+                instance = tempInstance
+                tempInstance
+            }
         }
     }
 }

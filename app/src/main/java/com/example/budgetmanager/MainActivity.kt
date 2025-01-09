@@ -10,9 +10,7 @@ import com.example.budgetmanager.repository.ProfileRepository
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var userProfileViewModel: UserProfileModelView
     private lateinit var navController: NavController
-    private lateinit var profileRepository: ProfileRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,16 +28,6 @@ class MainActivity : AppCompatActivity() {
         // התאמת Toolbar ל-Navigation Component
         val appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
-
-        // בדיקת פרופיל קיים וניווט למסך המתאים
-        profileRepository = ProfileRepository(application)
-        val existingProfile = profileRepository.getUserProfile()
-
-        if (existingProfile == null) {
-            navController.navigate(R.id.createAccountFragment)
-        } else {
-            navController.navigate(R.id.profileFragment)
-        }
     }
 
     override fun onSupportNavigateUp(): Boolean {

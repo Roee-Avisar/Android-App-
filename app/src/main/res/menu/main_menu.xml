@@ -2,23 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item
-        android:id="@+id/action_exit"
-        android:title="Exit Account"
-        android:icon="@drawable/baseline_close_24"
-        app:showAsAction="always"/>
 
     <item
-        android:id="@+id/action_delete"
+        android:id="@+id/action_current_budget"
+        android:title="Budget: $0.00"
+        app:showAsAction="ifRoom"
+        android:enabled="false"
+        android:titleTextColor="@color/budget_text_color" />
+    <item
+        android:id="@+id/action_delete_all"
         android:icon="@drawable/baseline_backspace_24"
         android:title="Delete all"
         app:showAsAction="always" />
-
-    <item
-        android:id="@+id/action_return"
-        android:title="Return"
-        android:icon="@drawable/baseline_arrow_circle_left_24"
-        app:showAsAction="always"/>
-
 
 </menu>

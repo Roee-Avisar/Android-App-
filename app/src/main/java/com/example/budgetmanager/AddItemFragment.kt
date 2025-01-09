@@ -13,9 +13,12 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.budgetmanager.Tables.Item
 import com.example.budgetmanager.databinding.AddItemLayoutBinding
+import com.example.budgetmanager.viewmodel.BudgetViewModel
+import kotlinx.coroutines.launch
 import java.util.Calendar
 
 class AddItemFragment : Fragment() {
@@ -23,7 +26,7 @@ class AddItemFragment : Fragment() {
     private var _binding : AddItemLayoutBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: ItemsViewModel by activityViewModels()
+    private val viewModel: BudgetViewModel by activityViewModels()
 
     private var imageUri : Uri? = null
     private val pickImageLauncher : ActivityResultLauncher<Array<String>> =
@@ -47,6 +50,15 @@ class AddItemFragment : Fragment() {
 
         val currentBudget = arguments?.getDouble("currentBudget", 0.0) ?: 0.0
         binding.currentBudgetValue.text = String.format("%.2f", currentBudget)
+
+        val isExpense = arguments?.getBoolean("isExpense", false) ?: false
+        if (isExpense) {
+            binding.expenseRadio.isChecked = true
+            binding.currentBudgetValue.setTextColor(requireContext().getColor(R.color.red))
+        } else {
+            binding.incomeRadio.isChecked = true
+            binding.currentBudgetValue.setTextColor(requireContext().getColor(R.color.green))
+        }
 
         binding.datePicker.setOnClickListener {
             val calendar = Calendar.getInstance()
@@ -73,6 +85,7 @@ class AddItemFragment : Fragment() {
             val description = binding.descriptionInput.text.toString().trim()
             val date = binding.datePicker.text.toString()
             val isExpense = binding.expenseRadio.isChecked
+
             if (amountText.isEmpty() || description.isEmpty() || date.isEmpty()) {
                 Toast.makeText(requireContext(),
                     getString(R.string.please_fill_in_all_fields), Toast.LENGTH_SHORT)
@@ -87,18 +100,28 @@ class AddItemFragment : Fragment() {
                         photo = imageUri?.toString(),
                         isExpense = isExpense
                     )
-                    viewModel.addItem(item, isExpense) // קריאה ל-ViewModel
-                    Toast.makeText(requireContext(),
-                        getString(R.string.item_added_successfully), Toast.LENGTH_SHORT)
-                        .show()
-                    findNavController().navigate(R.id.action_addItemFragment_to_allItemsFragment)
+
+                    // Launching a coroutine to call the suspended function
+                    viewLifecycleOwner.lifecycleScope.launch {
+                        try {
+                            // Call the suspended function inside the coroutine
+                            viewModel.addItem(item)
+                            Toast.makeText(requireContext(),
+                                getString(R.string.item_added_successfully), Toast.LENGTH_SHORT)
+                                .show()
+                            findNavController().navigate(R.id.action_addItemFragment_to_allItemsFragment)
+                        } catch (e: Exception) {
+                            Toast.makeText(requireContext(),
+                                getString(R.string.invalid_amount_format), Toast.LENGTH_SHORT)
+                                .show()
+                        }
+                    }
+
                 } catch (e: NumberFormatException) {
                     Toast.makeText(requireContext(),
                         getString(R.string.invalid_amount_format), Toast.LENGTH_SHORT)
                         .show()
                 }
-
-
             }
         }
 

@@ -15,13 +15,13 @@ interface ItemDao {
 
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun addItem(item: Item)
+    suspend fun addItem(item: Item)
 
     @Delete
-    fun deleteItem(vararg: Item)
+    suspend fun deleteItem(vararg: Item)
 
     @Update
-    fun update(item: Item)
+    suspend fun update(item: Item)
 
     @Query("SELECT * FROM item")
     fun getItems() : LiveData<List<Item>>
@@ -30,5 +30,5 @@ interface ItemDao {
     fun getItem(id:Int) : Item?
 
     @Query("DELETE  FROM item")
-    fun deleteAll()
+    suspend fun deleteAll() : Int
 }
