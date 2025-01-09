@@ -14,6 +14,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.budgetmanager.Tables.Profile
 import com.example.budgetmanager.databinding.CreateAccountLayoutBinding
+import com.example.budgetmanager.viewModel.UserProfileModelView
 
 
 class CreateAccountFragment : Fragment() {

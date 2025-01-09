@@ -1,4 +1,4 @@
-package com.example.budgetmanager
+package com.example.budgetmanager.viewModel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -48,6 +48,11 @@ class UserProfileModelView(application: Application) : AndroidViewModel(applicat
             }
             ProfileRepository.insertUserProfile(currentProfile)
         }
+    }
+
+    fun getInitialBudget(): Double {
+        val currentProfile = ProfileRepository.getUserProfile()
+        return currentProfile?.initialBudget ?: 0.0
     }
 
 }

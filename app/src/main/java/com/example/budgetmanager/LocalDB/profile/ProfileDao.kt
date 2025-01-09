@@ -24,6 +24,4 @@ interface ProfileDao {
 
     @Query("SELECT * FROM user_profile_table LIMIT 1")
     fun getUserProfile(): Profile?
-
-
 }

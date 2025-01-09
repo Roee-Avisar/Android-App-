@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.example.budgetmanager.Tables.Item
 import com.example.budgetmanager.databinding.ItemDescriptionLayoutBinding
+import com.example.budgetmanager.viewModel.ItemsViewModel
 
 class DescriptionFragment : Fragment() {
 

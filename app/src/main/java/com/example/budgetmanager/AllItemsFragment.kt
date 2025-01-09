@@ -9,13 +9,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.compose.ui.semantics.dismiss
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.dialog
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.budgetmanager.databinding.AllItemLayoutBinding
+import com.example.budgetmanager.viewModel.ItemsViewModel
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class AllItemsFragment : Fragment() {
 
@@ -83,10 +87,20 @@ class AllItemsFragment : Fragment() {
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val item = (binding.recycler.adapter as ItemAdapter).itemAt(viewHolder.adapterPosition)
-                viewModel.deleteItem(item)
+                MaterialAlertDialogBuilder(requireContext())
+                    .setTitle("Delete Item")
+                    .setMessage("Are you sure you want to delete this item?")
+                    .setPositiveButton("Yes") { _, _ ->
+                        viewModel.deleteItem(item)
+                    }
+                    .setNegativeButton("Cancel") { dialog, _ ->
+                        // If canceled, notify the adapter to redraw the item
+                        binding.recycler.adapter?.notifyItemChanged(viewHolder.adapterPosition)
+                        dialog.dismiss()
+                    }
+                    .show()
             }
         }).attachToRecyclerView(binding.recycler)
-
 
     }
 

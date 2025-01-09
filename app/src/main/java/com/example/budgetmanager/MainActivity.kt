@@ -7,6 +7,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.budgetmanager.repository.ProfileRepository
+import com.example.budgetmanager.viewModel.UserProfileModelView
 
 class MainActivity : AppCompatActivity() {
 
