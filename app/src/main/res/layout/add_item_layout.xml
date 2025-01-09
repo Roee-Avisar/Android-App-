@@ -79,7 +79,7 @@
         android:layout_gravity="center"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:backgroundTint="#6495ED"
+        android:backgroundTint="@color/purple"
         android:textColor="#FFFFFF"
         android:padding="12dp" />
 
@@ -103,7 +103,7 @@
         android:text="@string/confirm"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:backgroundTint="#6495ED"
+        android:backgroundTint="@color/purple"
         android:textColor="#FFFFFF"
         android:padding="12dp" />
 

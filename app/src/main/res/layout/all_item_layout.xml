@@ -22,7 +22,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:id="@+id/add_transaction_button"
-        app:backgroundTint="@color/buttun"/>
+        app:backgroundTint="@color/purple"/>
 
 
 

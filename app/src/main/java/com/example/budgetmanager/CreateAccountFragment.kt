@@ -79,7 +79,7 @@ class CreateAccountFragment : Fragment() {
             Toast.makeText(requireContext(),
                 getString(R.string.profile_created_successfully), Toast.LENGTH_SHORT)
                 .show()
-            findNavController().navigate(R.id.action_createAccountFragment_to_profileFragment)
+            findNavController().navigate(R.id.action_createAccountFragment_to_allItemsFragment)
         }
     }
 

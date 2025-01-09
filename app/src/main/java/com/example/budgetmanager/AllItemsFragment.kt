@@ -124,6 +124,9 @@ class AllItemsFragment : Fragment() {
                 showDeleteConfirmationDialog()
                 return true
             }
+            R.id.action_account -> {
+                findNavController().navigate(R.id.action_allItemsFragment_to_profileFragment)
+            }
         }
         return super.onOptionsItemSelected(item)
 

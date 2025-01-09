@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
         // הגדרת Toolbar
         val toolbar: androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
 
         // קבלת NavController
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
@@ -39,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         if (existingProfile == null) {
             navController.navigate(R.id.createAccountFragment)
         } else {
-            navController.navigate(R.id.profileFragment)
+            navController.navigate(R.id.allItemsFragment)
         }
     }
 

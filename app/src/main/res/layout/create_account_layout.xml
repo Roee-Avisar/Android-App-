@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:text="@string/upload_image"
             android:layout_gravity="center"
-            android:backgroundTint="#6495ED"
+            android:backgroundTint="@color/purple"
             android:textColor="#FFFFFF" />
 
         <EditText
@@ -79,7 +79,7 @@
             android:text="@string/save_user"
             android:layout_marginTop="150dp"
             android:textStyle="bold"
-            android:backgroundTint="#6495ED"
+            android:backgroundTint="@color/purple"
             android:textColor="#FFFFFF"
             android:padding="12dp"
             />
