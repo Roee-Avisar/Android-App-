@@ -46,6 +46,9 @@ class AllItemsFragment : Fragment() {
             (activity as AppCompatActivity).supportActionBar?.title = "Budget: $${currentBudget}"
         }
 
+        binding.addTransactionButton.setOnClickListener {
+            findNavController().navigate(R.id.action_allItemsFragment_to_addItemFragment)
+        }
 
         // Observing items from ViewModel
         viewModel.items.observe(viewLifecycleOwner) { items ->

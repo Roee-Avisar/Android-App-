@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -46,9 +47,9 @@ class AddItemFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val currentBudget = arguments?.getDouble("currentBudget", 0.0) ?: 0.0
-        binding.currentBudgetValue.text = String.format("%.2f", currentBudget)
-
+        profileViewModel.budgetLiveData.observe(viewLifecycleOwner) { currentBudget ->
+            (activity as AppCompatActivity).supportActionBar?.title = "Budget: $${currentBudget}"
+        }
         binding.datePicker.setOnClickListener {
             val calendar = Calendar.getInstance()
             val year = calendar.get(Calendar.YEAR)

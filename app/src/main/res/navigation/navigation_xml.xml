@@ -55,6 +55,9 @@
         <action
             android:id="@+id/action_allItemsFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_allItemsFragment_to_addItemFragment"
+            app:destination="@id/addItemFragment" />
     </fragment>
     <fragment
         android:id="@+id/descriptionFragment"
