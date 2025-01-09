@@ -11,47 +11,54 @@ import com.example.budgetmanager.repository.ProfileRepository
 
 class UserProfileModelView(application: Application) : AndroidViewModel(application) {
 
-    private val ProfileRepository = ProfileRepository(application)
+    private val profileRepository = ProfileRepository(application)
     private val ItemRepository = ItemsRepository(application)
+
+    private val _budgetLiveData = MutableLiveData<Double>()
+    val budgetLiveData: LiveData<Double> get() = _budgetLiveData
+
 
     private val _userProfileLiveData = MutableLiveData<Profile?>()
     val userProfileLiveData: LiveData<Profile?> get() = _userProfileLiveData
 
     init {
         // אתחול ה-LiveData בפרופיל הנוכחי
-        _userProfileLiveData.value = ProfileRepository.getUserProfile()
+        val currentProfile = profileRepository.getUserProfile()
+        _userProfileLiveData.value = currentProfile
+        _budgetLiveData.value = currentProfile?.initialBudget ?: 0.0
     }
 
     fun insertUserProfile(profile: Profile) {
-        ProfileRepository.insertUserProfile(profile)
+        profileRepository.insertUserProfile(profile)
         _userProfileLiveData.value = profile
     }
 
     fun deleteUserProfile() {
-        ProfileRepository.deleteUserProfile()
+        profileRepository.deleteUserProfile()
         ItemRepository.deleteAll()
         _userProfileLiveData.value = null
     }
 
 
     fun getUserProfile(): Profile? {
-        return ProfileRepository.getUserProfile()
+        return profileRepository.getUserProfile()
     }
 
     fun updateBudget(amount: Double, isExpense: Boolean) {
-        val currentProfile = ProfileRepository.getUserProfile()
+        val currentProfile = profileRepository.getUserProfile()
         if (currentProfile != null) {
             if (isExpense) {
                 currentProfile.initialBudget -= amount
             } else {
                 currentProfile.initialBudget += amount
             }
-            ProfileRepository.insertUserProfile(currentProfile)
+            profileRepository.insertUserProfile(currentProfile)
+            _budgetLiveData.value = currentProfile.initialBudget
         }
     }
 
     fun getInitialBudget(): Double {
-        val currentProfile = ProfileRepository.getUserProfile()
+        val currentProfile = profileRepository.getUserProfile()
         return currentProfile?.initialBudget ?: 0.0
     }
 

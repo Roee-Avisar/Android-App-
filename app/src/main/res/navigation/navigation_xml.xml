@@ -8,7 +8,7 @@
         android:id="@+id/addItemFragment"
         android:name="com.example.budgetmanager.AddItemFragment"
         android:label="add_item_layout"
-        tools:layout="@layout/add_item_layout" >
+        tools:layout="@layout/add_item_layout">
         <action
             android:id="@+id/action_addItemFragment_to_profileFragment"
             app:destination="@id/profileFragment" />

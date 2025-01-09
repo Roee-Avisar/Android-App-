@@ -9,16 +9,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.compose.ui.semantics.dismiss
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.dialog
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.budgetmanager.databinding.AllItemLayoutBinding
 import com.example.budgetmanager.viewModel.ItemsViewModel
+import com.example.budgetmanager.viewModel.UserProfileModelView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class AllItemsFragment : Fragment() {
@@ -27,6 +27,7 @@ class AllItemsFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: ItemsViewModel by activityViewModels()
+    private val profileViewModel: UserProfileModelView by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,6 +41,10 @@ class AllItemsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        profileViewModel.budgetLiveData.observe(viewLifecycleOwner) { currentBudget ->
+            (activity as AppCompatActivity).supportActionBar?.title = "Budget: $${currentBudget}"
+        }
 
 
         // Observing items from ViewModel

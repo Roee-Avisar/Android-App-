@@ -22,7 +22,6 @@ class ItemsRepository(application: Application) {
 
     fun addItem(item: Item, isExpense: Boolean){
         itemDao.addItem(item)
-        updateBudget(item.amount, isExpense)
     }
 
     fun deleteItem(item: Item){
@@ -37,18 +36,6 @@ class ItemsRepository(application: Application) {
 
     fun getUserProfile() : Profile?{
         return profileDao.getUserProfile()
-    }
-
-    fun updateBudget(amount: Double, isExpense: Boolean) {
-        val currentProfile = profileDao.getUserProfile()
-        if (currentProfile != null) {
-            if (isExpense) {
-                currentProfile.initialBudget -= amount
-            } else {
-                currentProfile.initialBudget += amount
-            }
-            profileDao.insertUserProfile(currentProfile)
-        }
     }
 
 }
