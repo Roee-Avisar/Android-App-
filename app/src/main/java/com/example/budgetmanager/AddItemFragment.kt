@@ -47,6 +47,8 @@ class AddItemFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
+
         profileViewModel.budgetLiveData.observe(viewLifecycleOwner) { currentBudget ->
             (activity as AppCompatActivity).supportActionBar?.title = "Budget: $${currentBudget}"
         }
