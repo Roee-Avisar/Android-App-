@@ -8,58 +8,78 @@ import com.example.budgetmanager.Tables.Profile
 import com.example.budgetmanager.repository.ItemsRepository
 import com.example.budgetmanager.repository.ProfileRepository
 
-
-class UserProfileModelView(application: Application) : AndroidViewModel(application) {
+class UserProfileViewModel(application: Application) : AndroidViewModel(application) {
 
     private val profileRepository = ProfileRepository(application)
-    private val ItemRepository = ItemsRepository(application)
+    private val itemRepository = ItemsRepository(application)
 
     private val _budgetLiveData = MutableLiveData<Double>()
     val budgetLiveData: LiveData<Double> get() = _budgetLiveData
 
+    private val _expensesLiveData = MutableLiveData<Double>()
+    val expensesLiveData: LiveData<Double> get() = _expensesLiveData
+
+    private val _incomeLiveData = MutableLiveData<Double>()
+    val incomeLiveData: LiveData<Double> get() = _incomeLiveData
 
     private val _userProfileLiveData = MutableLiveData<Profile?>()
     val userProfileLiveData: LiveData<Profile?> get() = _userProfileLiveData
 
     init {
-        // אתחול ה-LiveData בפרופיל הנוכחי
+        // Initialize LiveData with the current profile
         val currentProfile = profileRepository.getUserProfile()
         _userProfileLiveData.value = currentProfile
         _budgetLiveData.value = currentProfile?.initialBudget ?: 0.0
-    }
-
-    fun insertUserProfile(profile: Profile) {
-        profileRepository.insertUserProfile(profile)
-        _userProfileLiveData.value = profile
+        _expensesLiveData.value = 0.0
+        _incomeLiveData.value = 0.0
     }
 
     fun deleteUserProfile() {
+        // Delete the current profile and reset all live data
         profileRepository.deleteUserProfile()
-        ItemRepository.deleteAll()
+        itemRepository.deleteAll()
+
+        // Reset all state variables to zero
         _userProfileLiveData.value = null
+        _budgetLiveData.value = 0.0
+        _expensesLiveData.value = 0.0
+        _incomeLiveData.value = 0.0
     }
 
+    fun insertUserProfile(profile: Profile) {
+        // Insert the new profile and reset live data accordingly
+        profileRepository.insertUserProfile(profile)
+        _userProfileLiveData.value = profile
 
-    fun getUserProfile(): Profile? {
-        return profileRepository.getUserProfile()
+        // Initialize live data based on the new profile's initial budget
+        _budgetLiveData.value = profile.initialBudget
+        _expensesLiveData.value = 0.0
+        _incomeLiveData.value = 0.0
     }
+
 
     fun updateBudget(amount: Double, isExpense: Boolean) {
-        val currentProfile = profileRepository.getUserProfile()
-        if (currentProfile != null) {
-            if (isExpense) {
-                currentProfile.initialBudget -= amount
+        if (amount <= 0) {
+            // Log or handle invalid amount
+            return
+        }
+
+        _userProfileLiveData.value?.let { currentProfile ->
+            val newBudget = if (isExpense) {
+                _expensesLiveData.value = (_expensesLiveData.value ?: 0.0) + amount
+                currentProfile.initialBudget - amount
             } else {
-                currentProfile.initialBudget += amount
+                _incomeLiveData.value = (_incomeLiveData.value ?: 0.0) + amount
+                currentProfile.initialBudget + amount
             }
+
+            currentProfile.initialBudget = newBudget
             profileRepository.insertUserProfile(currentProfile)
-            _budgetLiveData.value = currentProfile.initialBudget
+            _budgetLiveData.value = newBudget
         }
     }
 
     fun getInitialBudget(): Double {
-        val currentProfile = profileRepository.getUserProfile()
-        return currentProfile?.initialBudget ?: 0.0
+        return _userProfileLiveData.value?.initialBudget ?: 0.0
     }
-
 }

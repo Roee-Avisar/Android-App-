@@ -7,11 +7,11 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.budgetmanager.repository.ProfileRepository
-import com.example.budgetmanager.viewModel.UserProfileModelView
+import com.example.budgetmanager.viewModel.UserProfileViewModel
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var userProfileViewModel: UserProfileModelView
+    private lateinit var userProfileViewModel: UserProfileViewModel
     private lateinit var navController: NavController
     private lateinit var profileRepository: ProfileRepository
 

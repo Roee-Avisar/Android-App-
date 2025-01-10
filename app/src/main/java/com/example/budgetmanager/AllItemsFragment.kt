@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.budgetmanager.databinding.AllItemLayoutBinding
 import com.example.budgetmanager.viewModel.ItemsViewModel
-import com.example.budgetmanager.viewModel.UserProfileModelView
+import com.example.budgetmanager.viewModel.UserProfileViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class AllItemsFragment : Fragment() {
@@ -27,7 +27,7 @@ class AllItemsFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: ItemsViewModel by activityViewModels()
-    private val profileViewModel: UserProfileModelView by activityViewModels()
+    private val profileViewModel: UserProfileViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,

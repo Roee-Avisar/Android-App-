@@ -16,7 +16,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.budgetmanager.Tables.Item
 import com.example.budgetmanager.databinding.AddItemLayoutBinding
 import com.example.budgetmanager.viewModel.ItemsViewModel
-import com.example.budgetmanager.viewModel.UserProfileModelView
+import com.example.budgetmanager.viewModel.UserProfileViewModel
 import java.util.Calendar
 
 class AddItemFragment : Fragment() {
@@ -25,7 +25,7 @@ class AddItemFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: ItemsViewModel by activityViewModels()
-    private val profileViewModel: UserProfileModelView by activityViewModels()
+    private val profileViewModel: UserProfileViewModel by activityViewModels()
 
     private var imageUri : Uri? = null
     private val pickImageLauncher : ActivityResultLauncher<Array<String>> =

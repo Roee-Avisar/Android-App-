@@ -14,7 +14,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.budgetmanager.Tables.Profile
 import com.example.budgetmanager.databinding.CreateAccountLayoutBinding
-import com.example.budgetmanager.viewModel.UserProfileModelView
+import com.example.budgetmanager.viewModel.UserProfileViewModel
 
 
 class CreateAccountFragment : Fragment() {
@@ -23,7 +23,7 @@ class CreateAccountFragment : Fragment() {
     private val binding get() = _binding!!
 
     private var imageUri : Uri? = null
-    private val userProfileViewModel: UserProfileModelView by activityViewModels()
+    private val userProfileViewModel: UserProfileViewModel by activityViewModels()
 
     private val pickImageLauncher : ActivityResultLauncher<Array<String>> =
         registerForActivityResult(ActivityResultContracts.OpenDocument()){
