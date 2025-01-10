@@ -1,7 +1,9 @@
 package com.example.budgetmanager
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -19,6 +21,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // Initialize ViewModel and ProfileRepository
+        userProfileViewModel = ViewModelProvider(this).get(UserProfileViewModel::class.java)
+        profileRepository = ProfileRepository(application)
 
         // הגדרת Toolbar
         val toolbar: androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
@@ -29,19 +34,27 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         navController = navHostFragment.navController
 
-        // התאמת Toolbar ל-Navigation Component
-        val appBarConfiguration = AppBarConfiguration(navController.graph)
-        setupActionBarWithNavController(navController, appBarConfiguration)
+        userProfileViewModel.userProfileLiveData.observe(this, { existingProfile ->
+            if (existingProfile == null) {
+                // If no profile exists, navigate to AccountCreationActivity
+                val intent = Intent(this, AccountCreationActivity::class.java)
+                startActivity(intent)
+                finish()
+            } else {
+                // If profile exists, show AllItemsFragment (home screen)
+                val appBarConfiguration = AppBarConfiguration(navController.graph)
+                setupActionBarWithNavController(navController, appBarConfiguration)
 
-        // בדיקת פרופיל קיים וניווט למסך המתאים
-        profileRepository = ProfileRepository(application)
-        val existingProfile = profileRepository.getUserProfile()
+                // Navigate to the AllItemsFragment (or ensure the fragment is loaded)
+                if (navController.currentDestination?.id != R.id.allItemsFragment) {
+                    navController.navigate(R.id.allItemsFragment)
+                }
+            }
+            // התאמת Toolbar ל-Navigation Component
+            val appBarConfiguration = AppBarConfiguration(navController.graph)
+            setupActionBarWithNavController(navController, appBarConfiguration)
 
-        if (existingProfile == null) {
-            navController.navigate(R.id.createAccountFragment)
-        } else {
-            navController.navigate(R.id.allItemsFragment)
-        }
+        })
     }
 
     override fun onSupportNavigateUp(): Boolean {

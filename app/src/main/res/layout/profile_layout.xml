@@ -105,26 +105,6 @@
                 android:textColor="#F44336" />
         </LinearLayout>
 
-        <Button
-            android:id="@+id/update_budget_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:backgroundTint="#6495ED"
-            android:padding="12dp"
-            android:text="@string/update_budget"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold" />
 
-        <Button
-            android:id="@+id/all_items_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:backgroundTint="#6495ED"
-            android:padding="12dp"
-            android:text="@string/watch_all_the_budget_updates"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold" />
     </LinearLayout>
 </ScrollView>

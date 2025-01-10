@@ -54,26 +54,10 @@ class ProfileFragment : Fragment() {
                     getString(R.string.no_profile_found),
                     Toast.LENGTH_SHORT
                 ).show()
-                findNavController().navigate(R.id.createAccountFragment)
-            }
-        }
-        binding.updateBudgetButton.setOnClickListener {
-            val currentBudget = userProfileViewModel.userProfileLiveData.value?.initialBudget
-            if (currentBudget != null) {
-                val bundle = Bundle().apply {
-                    putDouble("currentBudget", currentBudget) // מעביר את התקציב הנוכחי אם קיים
-                }
-
-                findNavController().navigate(R.id.action_profileFragment_to_addItemFragment, bundle)
-            }else{
-                Toast.makeText(requireContext(),
-                    getString(R.string.no_budget_available), Toast.LENGTH_SHORT).show()
             }
         }
 
-        binding.allItemsBtn.setOnClickListener {
-            findNavController().navigate(R.id.action_profileFragment_to_allItemsFragment)
-        }
+
 
     }
 
@@ -98,7 +82,6 @@ class ProfileFragment : Fragment() {
                 userProfileViewModel.deleteUserProfile()
                 Toast.makeText(requireContext(), R.string.all_items_deleted, Toast.LENGTH_SHORT).show()
 
-                findNavController().navigate(R.id.createAccountFragment)
             }
             .setNegativeButton(R.string.no, null)
             .show()
