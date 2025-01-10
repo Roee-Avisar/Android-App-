@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.example.budgetmanager.databinding.ProfileLayoutBinding
 import com.example.budgetmanager.viewModel.UserProfileViewModel
 
@@ -46,7 +47,11 @@ class ProfileFragment : Fragment() {
                 binding.expenseValue.text = userProfileViewModel.expensesLiveData.value.toString()
                 binding.incomeValue.text = userProfileViewModel.incomeLiveData.value.toString()
                 if (!profile.imageUri.isNullOrEmpty()) {
-                    binding.profileImage.setImageURI(Uri.parse(profile.imageUri))
+                    Glide.with(binding.root.context)
+                        .load(Uri.parse(profile.imageUri)) // Load the image from the URI
+                        .placeholder(R.drawable.ic_launcher_background)
+                        .circleCrop()// Default image while loading
+                        .into(binding.profileImage)
                 }
 
             } else {

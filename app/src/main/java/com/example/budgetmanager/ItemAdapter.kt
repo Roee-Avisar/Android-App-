@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.budgetmanager.Tables.Item
 import com.example.budgetmanager.databinding.AddItemLayoutBinding
 import com.example.budgetmanager.databinding.ItemLayoutBinding
+import com.bumptech.glide.Glide
 
 class ItemAdapter(val items: List<Item>, val callBack: ItemListener)
     : RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
@@ -40,9 +41,16 @@ class ItemAdapter(val items: List<Item>, val callBack: ItemListener)
             binding.itemAmount.text = item.amount.toString()
             binding.itemDate.text = item.date
             if (item.photo != null) {
-                binding.itemImage.setImageURI(Uri.parse(item.photo))
+                Glide.with(binding.root.context)
+                    .load(Uri.parse(item.photo)) // Load the image from the URI
+                    .placeholder(R.drawable.ic_launcher_background) // Default image while loading
+                    .circleCrop()
+                    .into(binding.itemImage)
             } else {
-                binding.itemImage.setImageResource(R.drawable.ic_launcher_background) // תמונת ברירת מחדל
+                Glide.with(binding.root.context)
+                    .load(R.drawable.ic_launcher_background)
+                    .circleCrop()// Load the default image
+                    .into(binding.itemImage)// תמונת ברירת מחדל
             }
 
             val strokColor = if (item.isExpense) {
