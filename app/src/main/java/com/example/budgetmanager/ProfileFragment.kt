@@ -36,6 +36,7 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as? AppCompatActivity)?.supportActionBar?.title = "Budget Manager Profile"
 
         userProfileViewModel.userProfileLiveData.observe(viewLifecycleOwner) { profile ->
             if (profile != null) {
@@ -78,6 +79,8 @@ class ProfileFragment : Fragment() {
 
     override fun onPrepareOptionsMenu(menu: Menu) {
         val deleteIcon = menu.findItem(R.id.action_delete)
+        val profileIcon = menu.findItem(R.id.action_account)
+        profileIcon.isVisible = false
         deleteIcon.isVisible = false
         super.onPrepareOptionsMenu(menu)
     }

@@ -10,9 +10,6 @@
         android:label="add_item_layout"
         tools:layout="@layout/add_item_layout">
         <action
-            android:id="@+id/action_addItemFragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
-        <action
             android:id="@+id/action_addItemFragment_to_allItemsFragment"
             app:destination="@id/allItemsFragment" />
     </fragment>
