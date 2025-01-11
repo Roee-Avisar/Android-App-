@@ -35,20 +35,4 @@ class ItemsViewModel(application: Application) : AndroidViewModel(application) {
         repository.deleteAll()
     }
 
-    fun getUserProfile(): Profile? {
-        return repository.getUserProfile()
-    }
-
-    fun updateBudget(amount: Double, isExpense: Boolean){
-        val currentProfile = repository.getUserProfile()
-        if (currentProfile != null){
-            if(isExpense) {
-                currentProfile.initialBudget -= amount
-            }
-            else{
-                currentProfile.initialBudget += amount
-            }
-            profileRepo.insertUserProfile(currentProfile)
-        }
-    }
 }

@@ -42,4 +42,9 @@
     <string name="no_budget_available">אין תקציב זמין</string>
     <string name="exit_this_profile">צא מפרופיל זה</string>
     <string name="invalid_item">פריט לא תקין</string>
+    <string name="cancel">ביטול</string>
+    <string name="are_you_sure_you_want_to_delete_this_item">אתה בטוח שאתה רוצה את הפריט הזה</string>
+    <string name="delete_item">מחק פריט</string>
+    <string name="budget">תקציב</string>
+
 </resources>

@@ -27,6 +27,7 @@ class DescriptionFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = ItemDescriptionLayoutBinding.inflate(inflater, container, false)
+        (activity as? AppCompatActivity)?.supportActionBar?.setDisplayHomeAsUpEnabled(false)
         return binding.root
 
     }

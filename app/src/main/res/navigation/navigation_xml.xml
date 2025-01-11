@@ -7,23 +7,22 @@
     <fragment
         android:id="@+id/addItemFragment"
         android:name="com.example.budgetmanager.AddItemFragment"
-        android:label="add_item_layout"
+
         tools:layout="@layout/add_item_layout">
         <action
             android:id="@+id/action_addItemFragment_to_allItemsFragment"
             app:destination="@id/allItemsFragment"
-            app:popUpTo="@id/allItemsFragment"
-            app:popUpToInclusive="true" />
+     />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.budgetmanager.ProfileFragment"
-        android:label="profile_layout"
+
         tools:layout="@layout/profile_layout" />
     <fragment
         android:id="@+id/allItemsFragment"
         android:name="com.example.budgetmanager.AllItemsFragment"
-        android:label="all_item_layout"
+
         tools:layout="@layout/all_item_layout" >
         <action
             android:id="@+id/action_allItemsFragment_to_descriptionFragment"
@@ -38,6 +37,6 @@
     <fragment
         android:id="@+id/descriptionFragment"
         android:name="com.example.budgetmanager.DescriptionFragment"
-        android:label="item_description_layout"
+
         tools:layout="@layout/item_description_layout" />
 </navigation>

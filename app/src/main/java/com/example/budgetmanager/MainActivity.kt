@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
         // Initialize ViewModel and ProfileRepository
         userProfileViewModel = ViewModelProvider(this).get(UserProfileViewModel::class.java)
         profileRepository = ProfileRepository(application)
@@ -47,7 +48,7 @@ class MainActivity : AppCompatActivity() {
                 setupActionBarWithNavController(navController, appBarConfiguration)
 
                 // Navigate to the AllItemsFragment (or ensure the fragment is loaded)
-                if (navController.currentDestination?.id != R.id.allItemsFragment) {
+                if (savedInstanceState == null && navController.currentDestination?.id == null) {
                     navController.navigate(R.id.allItemsFragment)
                 }
             }
@@ -61,6 +62,18 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        val navState = navController.saveState()
+        outState.putBundle("nav_state", navState)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        savedInstanceState.getBundle("nav_state")?.let { navController.restoreState(it) }
+    }
+
 
 }
 

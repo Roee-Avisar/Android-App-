@@ -1,7 +1,9 @@
 package com.example.budgetmanager
 
+import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -13,7 +15,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.budgetmanager.databinding.ProfileLayoutBinding
 import com.example.budgetmanager.viewModel.UserProfileViewModel
@@ -31,18 +32,25 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         setHasOptionsMenu(true)
+        val isLandscape = resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+        if (isLandscape) {
+            Log.d("ProfileFragment", "Loaded landscape layout")
+        } else {
+            Log.d("ProfileFragment", "Loaded portrait layout")
+        }
+        (activity as? AppCompatActivity)?.supportActionBar?.title = "Budget Manager Profile"
         _binding = ProfileLayoutBinding.inflate(inflater, container, false)
+        (activity as? AppCompatActivity)?.supportActionBar?.setDisplayHomeAsUpEnabled(false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as? AppCompatActivity)?.supportActionBar?.title = "Budget Manager Profile"
-        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
+
 
         userProfileViewModel.userProfileLiveData.observe(viewLifecycleOwner) { profile ->
             if (profile != null) {
-                binding.profileName.text = "${profile.firstName} ${profile.lastName}"
+                binding.profileName?.text = "${profile.firstName} ${profile.lastName}"
                 binding.totalBudgetValue.text = userProfileViewModel.budgetLiveData.value.toString()
                 binding.expenseValue.text = userProfileViewModel.expensesLiveData.value.toString()
                 binding.incomeValue.text = userProfileViewModel.incomeLiveData.value.toString()
@@ -62,7 +70,6 @@ class ProfileFragment : Fragment() {
                 ).show()
             }
         }
-
 
 
     }
@@ -101,6 +108,17 @@ class ProfileFragment : Fragment() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            // העברת נתונים לתצוגת landscape
+            Log.d("ProfileFragment", "Landscape mode detected")
+        } else {
+            // העברת נתונים לתצוגת portrait
+            Log.d("ProfileFragment", "Portrait mode detected")
+        }
     }
 
     override fun onDestroyView() {

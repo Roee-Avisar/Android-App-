@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.budgetmanager.Tables.Item
 import com.example.budgetmanager.Tables.Profile
 import com.example.budgetmanager.repository.ItemsRepository
 import com.example.budgetmanager.repository.ProfileRepository
@@ -25,6 +26,7 @@ class UserProfileViewModel(application: Application) : AndroidViewModel(applicat
     private val _userProfileLiveData = MutableLiveData<Profile?>()
     val userProfileLiveData: LiveData<Profile?> get() = _userProfileLiveData
 
+
     init {
         // Initialize LiveData with the current profile
         val currentProfile = profileRepository.getUserProfile()
@@ -32,6 +34,18 @@ class UserProfileViewModel(application: Application) : AndroidViewModel(applicat
         _budgetLiveData.value = currentProfile?.initialBudget ?: 0.0
         _expensesLiveData.value = 0.0
         _incomeLiveData.value = 0.0
+    }
+
+    fun revertBudget(item: Item) {
+        val amountChange = if (item.isExpense) item.amount else -item.amount
+        val updatedBudget = (_budgetLiveData.value ?: 0.0) + amountChange
+
+        _budgetLiveData.value = updatedBudget
+
+        _userProfileLiveData.value?.let { currentProfile ->
+            currentProfile.initialBudget = updatedBudget
+            profileRepository.insertUserProfile(currentProfile)
+        }
     }
 
     fun deleteUserProfile() {
@@ -79,7 +93,5 @@ class UserProfileViewModel(application: Application) : AndroidViewModel(applicat
         }
     }
 
-    fun getInitialBudget(): Double {
-        return _userProfileLiveData.value?.initialBudget ?: 0.0
-    }
+
 }

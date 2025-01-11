@@ -1,5 +1,6 @@
 package com.example.budgetmanager
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
@@ -13,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -37,6 +39,7 @@ class AllItemsFragment : Fragment() {
     ): View {
         setHasOptionsMenu(true)
         _binding = AllItemLayoutBinding.inflate(inflater, container, false)
+        (activity as? AppCompatActivity)?.supportActionBar?.setDisplayHomeAsUpEnabled(false)
         return binding.root
     }
 
@@ -45,6 +48,15 @@ class AllItemsFragment : Fragment() {
 
         updateActionBarTitle()
         observeViewModels()
+
+
+        val isLandscape = resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+        val layoutManager = if (isLandscape) {
+            GridLayoutManager(requireContext(), 2) // Grid בתצוגת רוחב
+        } else {
+            LinearLayoutManager(requireContext()) // Linear בתצוגת אנכי
+        }
+        binding.recycler.layoutManager = layoutManager
 
         binding.addTransactionButton.setOnClickListener {
             findNavController().navigate(R.id.action_allItemsFragment_to_addItemFragment)
@@ -75,7 +87,7 @@ class AllItemsFragment : Fragment() {
                         findNavController().navigate(R.id.action_allItemsFragment_to_descriptionFragment)
                     }
                 })
-                binding.recycler.layoutManager = LinearLayoutManager(requireContext())
+//              binding.recycler.layoutManager = LinearLayoutManager(requireContext())
             }
         }
 
@@ -93,9 +105,11 @@ class AllItemsFragment : Fragment() {
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val item = (binding.recycler.adapter as ItemAdapter).itemAt(viewHolder.adapterPosition)
+
                 showDeleteConfirmationDialog(item, viewHolder.adapterPosition)
 
             }
+
         }).attachToRecyclerView(binding.recycler)
         updateActionBarTitle()
     }
@@ -128,24 +142,21 @@ class AllItemsFragment : Fragment() {
     }
     private fun observeViewModels() {
         profileViewModel.budgetLiveData.observe(viewLifecycleOwner) { budget ->
-            (activity as? AppCompatActivity)?.supportActionBar?.title = getString(R.string.budget, budget.toString())
+            (activity as? AppCompatActivity)?.supportActionBar?.title = getString(R.string.budget)
         }
     }
-
-
-
-
 
     private fun showDeleteConfirmationDialog(item: Item, position: Int) {
         MaterialAlertDialogBuilder(requireContext())
             .setTitle(getString(R.string.delete_item))
             .setMessage(getString(R.string.are_you_sure_you_want_to_delete_this_item))
             .setPositiveButton(getString(R.string.yes)) { _, _ ->
+                profileViewModel.revertBudget(item)
                 viewModel.deleteItem(item)
             }
             .setNegativeButton(getString(R.string.cancel)) { dialog, _ ->
-                // If canceled, notify the adapter to redraw the item
                 binding.recycler.adapter?.notifyItemChanged(position)
+
                 dialog.dismiss()
             }
             .show()
@@ -156,7 +167,18 @@ class AllItemsFragment : Fragment() {
             .setTitle(getString(R.string.delete_all_items))
             .setMessage(getString(R.string.are_you_sure_you_want_to_delete_all_items))
             .setPositiveButton(getString(R.string.yes)) { _, _ ->
+                val allItems = viewModel.items.value ?: emptyList()
+                allItems.forEach { item ->
+                    if (item.isExpense) {
+                        profileViewModel.updateBudget(item.amount, isExpense = false) // מחזירים תקציב
+                    } else {
+                        profileViewModel.updateBudget(item.amount, isExpense = true) // מורידים הכנסה
+                    }
+                }
+
+                // מחיקת כל הפריטים
                 viewModel.deleteAll()
+
                 Toast.makeText(requireContext(),
                     getString(R.string.all_items_deleted), Toast.LENGTH_SHORT).show()
             }
@@ -166,7 +188,7 @@ class AllItemsFragment : Fragment() {
     private fun updateActionBarTitle() {
         profileViewModel.budgetLiveData.value?.let { currentBudget ->
             (activity as? AppCompatActivity)?.supportActionBar?.title =
-                getString(R.string.budget, currentBudget.toString())
+                getString(R.string.budget)
         }
     }
 
