@@ -1,8 +1,8 @@
 package com.example.budgetmanager.repository
 
 import android.app.Application
+import com.example.budgetmanager.LocalDB.AppDatabase
 import com.example.budgetmanager.LocalDB.item.ItemDao
-import com.example.budgetmanager.LocalDB.item.ItemDataBase
 import com.example.budgetmanager.LocalDB.profile.ProfileDao
 import com.example.budgetmanager.Tables.Item
 import com.example.budgetmanager.Tables.Profile
@@ -13,7 +13,7 @@ class ItemsRepository(application: Application) {
     private  var itemDao: ItemDao
 
     init {
-        val db = ItemDataBase.getDataBase(application.applicationContext)
+        val db = AppDatabase.getDataBase(application.applicationContext)
         itemDao = db.itemDao()
         profileDao = db.profileDao()
     }
