@@ -1,4 +1,4 @@
-package com.example.budgetmanager
+package com.example.budgetmanager.UI.fragments
 
 import android.content.Intent
 import android.net.Uri
@@ -12,10 +12,11 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.findNavController
+import com.example.budgetmanager.R
 import com.example.budgetmanager.Tables.Profile
+import com.example.budgetmanager.UI.activitys.MainActivity
 import com.example.budgetmanager.databinding.CreateAccountLayoutBinding
-import com.example.budgetmanager.viewModel.UserProfileViewModel
+import com.example.budgetmanager.UI.viewModel.UserProfileViewModel
 
 
 class CreateAccountFragment : Fragment() {

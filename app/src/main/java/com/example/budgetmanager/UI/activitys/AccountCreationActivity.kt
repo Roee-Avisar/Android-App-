@@ -1,11 +1,11 @@
-package com.example.budgetmanager
+package com.example.budgetmanager.UI.activitys
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import com.example.budgetmanager.repository.ProfileRepository
-import com.example.budgetmanager.CreateAccountFragment
+import com.example.budgetmanager.UI.fragments.CreateAccountFragment
+import com.example.budgetmanager.R
 
 
 class AccountCreationActivity : AppCompatActivity() {

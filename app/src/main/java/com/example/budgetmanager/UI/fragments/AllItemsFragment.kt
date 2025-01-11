@@ -1,4 +1,4 @@
-package com.example.budgetmanager
+package com.example.budgetmanager.UI.fragments
 
 import android.content.res.Configuration
 import android.os.Bundle
@@ -18,10 +18,12 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.budgetmanager.ItemAdapter
+import com.example.budgetmanager.R
 import com.example.budgetmanager.Tables.Item
 import com.example.budgetmanager.databinding.AllItemLayoutBinding
-import com.example.budgetmanager.viewModel.ItemsViewModel
-import com.example.budgetmanager.viewModel.UserProfileViewModel
+import com.example.budgetmanager.UI.viewModel.ItemsViewModel
+import com.example.budgetmanager.UI.viewModel.UserProfileViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class AllItemsFragment : Fragment() {
@@ -66,28 +68,27 @@ class AllItemsFragment : Fragment() {
             if (items != null) {
                 binding.recycler.adapter = ItemAdapter(items, object : ItemAdapter.ItemListener {
                     override fun onItemClicked(index: Int) {
-                        if (index in items.indices) {
-                            Toast.makeText(
-                                requireContext(),
-                                getString(R.string.clicked_on, items[index].description),
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        } else {
-                            Toast.makeText(
-                                requireContext(),
-                                getString(R.string.invalid_item),
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
-                    }
-
-                    override fun onItemLongClick(index: Int) {
                         val item = items[index]
                         viewModel.setItem(item)
                         findNavController().navigate(R.id.action_allItemsFragment_to_descriptionFragment)
                     }
+
+                    override fun onItemLongClick(index: Int) {
+                        val item = items[index]
+                        MaterialAlertDialogBuilder(requireContext())
+                            .setTitle(getString(R.string.edit_item))
+                            .setMessage(getString(R.string.do_you_want_to_edit_this_item))
+                            .setPositiveButton(getString(R.string.edit)) { _, _ ->
+                                viewModel.setItem(item)
+                                findNavController().navigate(R.id.action_allItemsFragment_to_editItemFragment)
+                            }
+                            .setNegativeButton(getString(R.string.cancel)) { dialog, _ ->
+                                dialog.dismiss()
+                            }
+                            .show()
+            }
                 })
-//              binding.recycler.layoutManager = LinearLayoutManager(requireContext())
+              binding.recycler.layoutManager = LinearLayoutManager(requireContext())
             }
         }
 

@@ -1,4 +1,4 @@
-package com.example.budgetmanager
+package com.example.budgetmanager.UI.fragments
 
 import android.net.Uri
 import android.os.Bundle
@@ -9,8 +9,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.example.budgetmanager.R
 import com.example.budgetmanager.databinding.ItemDescriptionLayoutBinding
-import com.example.budgetmanager.viewModel.ItemsViewModel
+import com.example.budgetmanager.UI.viewModel.ItemsViewModel
 
 class DescriptionFragment : Fragment() {
 
@@ -45,7 +46,9 @@ class DescriptionFragment : Fragment() {
             } else {
                 binding.itemPhoto.setImageResource(R.drawable.ic_launcher_foreground)
             }
-            val cardView = binding.root.findViewById<com.google.android.material.card.MaterialCardView>(R.id.description_card_view)
+            val cardView = binding.root.findViewById<com.google.android.material.card.MaterialCardView>(
+                R.id.description_card_view
+            )
             val strokColor = if (it.isExpense) {
                 ContextCompat.getColor(binding.root.context, R.color.red)
             } else {

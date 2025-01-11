@@ -1,4 +1,4 @@
-package com.example.budgetmanager.viewModel
+package com.example.budgetmanager.UI.viewModel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -34,5 +34,10 @@ class ItemsViewModel(application: Application) : AndroidViewModel(application) {
     fun deleteAll(){
         repository.deleteAll()
     }
+
+    fun updateItem(updatedItem: Item) {
+        repository.updateItem(updatedItem, updatedItem.isExpense)
+    }
+
 
 }

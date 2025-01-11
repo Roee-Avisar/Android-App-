@@ -1,4 +1,4 @@
-package com.example.budgetmanager
+package com.example.budgetmanager.UI.fragments
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.net.Uri
@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -15,11 +14,12 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.example.budgetmanager.R
 import com.example.budgetmanager.Tables.Item
 import com.example.budgetmanager.databinding.AddItemLayoutBinding
-import com.example.budgetmanager.viewModel.AddItemViewModel
-import com.example.budgetmanager.viewModel.ItemsViewModel
-import com.example.budgetmanager.viewModel.UserProfileViewModel
+import com.example.budgetmanager.UI.viewModel.AddItemViewModel
+import com.example.budgetmanager.UI.viewModel.ItemsViewModel
+import com.example.budgetmanager.UI.viewModel.UserProfileViewModel
 import java.util.Calendar
 
 class AddItemFragment : Fragment() {

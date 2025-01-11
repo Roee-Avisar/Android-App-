@@ -10,7 +10,7 @@ import com.example.budgetmanager.Tables.Profile
 class ItemsRepository(application: Application) {
 
     private val profileDao: ProfileDao
-    private  var itemDao: ItemDao
+    private var itemDao: ItemDao
 
     init {
         val db = AppDatabase.getDataBase(application.applicationContext)
@@ -20,22 +20,25 @@ class ItemsRepository(application: Application) {
 
     fun getItems() = itemDao.getItems()
 
-    fun addItem(item: Item, isExpense: Boolean){
+    fun addItem(item: Item, isExpense: Boolean) {
         itemDao.addItem(item)
     }
 
-    fun deleteItem(item: Item){
+    fun deleteItem(item: Item) {
         itemDao.deleteItem(item)
     }
 
-    fun getItem(id : Int) = itemDao.getItem(id)
+    fun getItem(id: Int) = itemDao.getItem(id)
 
-    fun deleteAll(){
+    fun deleteAll() {
         itemDao.deleteAll()
     }
 
-    fun getUserProfile() : Profile?{
+    fun getUserProfile(): Profile? {
         return profileDao.getUserProfile()
     }
 
+    fun updateItem(updatedItem: Item, isExpense: Boolean) {
+        itemDao.update(updatedItem)
+    }
 }

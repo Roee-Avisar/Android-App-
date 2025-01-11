@@ -1,4 +1,4 @@
-package com.example.budgetmanager
+package com.example.budgetmanager.UI.fragments
 
 import android.content.res.Configuration
 import android.net.Uri
@@ -16,8 +16,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
+import com.example.budgetmanager.R
 import com.example.budgetmanager.databinding.ProfileLayoutBinding
-import com.example.budgetmanager.viewModel.UserProfileViewModel
+import com.example.budgetmanager.UI.viewModel.UserProfileViewModel
 
 class ProfileFragment : Fragment() {
 

@@ -1,16 +1,16 @@
-package com.example.budgetmanager
+package com.example.budgetmanager.UI.activitys
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.example.budgetmanager.R
 import com.example.budgetmanager.repository.ProfileRepository
-import com.example.budgetmanager.viewModel.UserProfileViewModel
+import com.example.budgetmanager.UI.viewModel.UserProfileViewModel
 
 class MainActivity : AppCompatActivity() {
 

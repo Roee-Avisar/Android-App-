@@ -50,4 +50,7 @@
     <string name="delete_item">Delete Item</string>
     <string name="image_selection_canceled">image seletion canceled</string>
     <string name="budget">Budget: $%s</string>
+    <string name="edit_item">Edit Item</string>
+    <string name="do_you_want_to_edit_this_item">Do you want to edit this item?</string>
+    <string name="edit">Edit</string>
 </resources>

@@ -12,9 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/Theme.BudgetManager"
         tools:targetApi="31">
-        <activity android:name=".AccountCreationActivity" />
+        <activity android:name=".UI.activitys.AccountCreationActivity" />
         <activity
-            android:name=".MainActivity"
+            android:name=".UI.activitys.MainActivity"
             android:screenOrientation="unspecified"
             android:exported="true">
             <intent-filter>

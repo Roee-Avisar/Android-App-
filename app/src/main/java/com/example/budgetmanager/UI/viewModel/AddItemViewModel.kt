@@ -1,4 +1,4 @@
-package com.example.budgetmanager.viewModel
+package com.example.budgetmanager.UI.viewModel
 
 import androidx.lifecycle.ViewModel
 
