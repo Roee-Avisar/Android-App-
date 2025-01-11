@@ -142,7 +142,7 @@ class AllItemsFragment : Fragment() {
     }
     private fun observeViewModels() {
         profileViewModel.budgetLiveData.observe(viewLifecycleOwner) { budget ->
-            (activity as? AppCompatActivity)?.supportActionBar?.title = getString(R.string.budget)
+            (activity as? AppCompatActivity)?.supportActionBar?.title = getString(R.string.budget, budget.toString())
         }
     }
 
@@ -167,18 +167,7 @@ class AllItemsFragment : Fragment() {
             .setTitle(getString(R.string.delete_all_items))
             .setMessage(getString(R.string.are_you_sure_you_want_to_delete_all_items))
             .setPositiveButton(getString(R.string.yes)) { _, _ ->
-                val allItems = viewModel.items.value ?: emptyList()
-                allItems.forEach { item ->
-                    if (item.isExpense) {
-                        profileViewModel.updateBudget(item.amount, isExpense = false) // מחזירים תקציב
-                    } else {
-                        profileViewModel.updateBudget(item.amount, isExpense = true) // מורידים הכנסה
-                    }
-                }
-
-                // מחיקת כל הפריטים
                 viewModel.deleteAll()
-
                 Toast.makeText(requireContext(),
                     getString(R.string.all_items_deleted), Toast.LENGTH_SHORT).show()
             }
@@ -188,7 +177,7 @@ class AllItemsFragment : Fragment() {
     private fun updateActionBarTitle() {
         profileViewModel.budgetLiveData.value?.let { currentBudget ->
             (activity as? AppCompatActivity)?.supportActionBar?.title =
-                getString(R.string.budget)
+                getString(R.string.budget, currentBudget.toString())
         }
     }
 

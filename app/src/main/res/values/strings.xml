@@ -48,6 +48,6 @@
     <string name="cancel">Cancel</string>
     <string name="are_you_sure_you_want_to_delete_this_item">Are you sure you want to delete this item?</string>
     <string name="delete_item">Delete Item</string>
-    <string name="budget">budget</string>
-
+    <string name="image_selection_canceled">image seletion canceled</string>
+    <string name="budget">Budget: $%s</string>
 </resources>

@@ -144,7 +144,23 @@ class AddItemFragment : Fragment() {
 
             }
         }
-
+         val pickImageLauncher: ActivityResultLauncher<Array<String>> =
+             registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
+                if (uri != null) {
+                    binding.selectedImage.setImageURI(uri)
+                    requireActivity().contentResolver.takePersistableUriPermission(
+                        uri,
+                        Intent.FLAG_GRANT_READ_URI_PERMISSION
+                    )
+                    imageUri = uri
+                } else {
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.image_selection_canceled),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
     }
 
 
