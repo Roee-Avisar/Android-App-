@@ -4,18 +4,20 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.example.budgetmanager.Tables.Item
 import com.example.budgetmanager.Tables.Profile
 import com.example.budgetmanager.repository.ItemsRepository
 import com.example.budgetmanager.repository.ProfileRepository
+import kotlinx.coroutines.launch
 
 
 class ItemsViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repository = ItemsRepository(application)
-    val items: LiveData<List<Item>> = repository.getItems()
+    val items: LiveData<List<Item>>? = repository.getItems()
     private val profileRepo = ProfileRepository(application)
-
+    val itemUpdatedEvent = MutableLiveData<Int>()
     private val _chosenItem = MutableLiveData<Item>()
     val chosenItem : LiveData<Item> get() = _chosenItem
 
@@ -34,6 +36,12 @@ class ItemsViewModel(application: Application) : AndroidViewModel(application) {
     fun deleteAll(){
         repository.deleteAll()
     }
+
+    fun updateItem(updatedItem: Item) {
+        repository.updateItem(updatedItem)
+        itemUpdatedEvent.value = updatedItem.id
+    }
+
 
     fun getUserProfile(): Profile? {
         return repository.getUserProfile()

@@ -1,4 +1,5 @@
 package com.example.budgetmanager
+
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.net.Uri
@@ -14,56 +15,68 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.budgetmanager.Tables.Item
-import com.example.budgetmanager.databinding.AddItemLayoutBinding
+import com.example.budgetmanager.databinding.EditItemFragmentBinding
 import com.example.budgetmanager.viewModel.ItemsViewModel
 import com.example.budgetmanager.viewModel.UserProfileViewModel
 import java.util.Calendar
 
-class AddItemFragment : Fragment() {
+class EditItemFragment : Fragment() {
 
-    private var _binding : AddItemLayoutBinding? = null
+    private var _binding: EditItemFragmentBinding? = null
     private val binding get() = _binding!!
 
     private val viewModel: ItemsViewModel by activityViewModels()
     private val profileViewModel: UserProfileViewModel by activityViewModels()
 
-
-    private var imageUri : Uri? = null
-    private val pickImageLauncher : ActivityResultLauncher<Array<String>> =
-        registerForActivityResult(ActivityResultContracts.OpenDocument()){
+    private var imageUri: Uri? = null
+    private val pickImageLauncher: ActivityResultLauncher<Array<String>> =
+        registerForActivityResult(ActivityResultContracts.OpenDocument()) {
             binding.selectedImage.setImageURI(it)
             requireActivity().contentResolver.takePersistableUriPermission(it!!, Intent.FLAG_GRANT_READ_URI_PERMISSION)
             imageUri = it
         }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
-        _binding = AddItemLayoutBinding.inflate(inflater,container,false)
+        _binding = EditItemFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         profileViewModel.budgetLiveData.observe(viewLifecycleOwner) { currentBudget ->
             (activity as AppCompatActivity).supportActionBar?.title = "Budget: $${currentBudget}"
         }
+
+        // Populate fields with the current item's data
+        viewModel.chosenItem.observe(viewLifecycleOwner) { item ->
+            item?.let {
+                binding.amountInput.setText(it.amount.toString())
+                binding.descriptionInput.setText(it.description)
+                binding.datePicker.setText(it.date)
+                // Set image if available
+                it.photo?.let { photoUri ->
+                    binding.selectedImage.setImageURI(Uri.parse(photoUri))
+                    imageUri = Uri.parse(photoUri)
+                }
+                binding.expenseRadio.isChecked = it.isExpense
+            }
+        }
+
         binding.datePicker.setOnClickListener {
             val calendar = Calendar.getInstance()
             val year = calendar.get(Calendar.YEAR)
             val month = calendar.get(Calendar.MONTH)
             val day = calendar.get(Calendar.DAY_OF_MONTH)
 
-            val datePickerDialog =
-                DatePickerDialog(requireContext(), { _, selectedYear, selectedMonth, selectedDay ->
-                    val date = "$selectedDay/${selectedMonth + 1}/$selectedYear"
-                    binding.datePicker.setText(date)
-                }, year, month, day)
+            val datePickerDialog = DatePickerDialog(requireContext(), { _, selectedYear, selectedMonth, selectedDay ->
+                val date = "$selectedDay/${selectedMonth + 1}/$selectedYear"
+                binding.datePicker.setText(date)
+            }, year, month, day)
 
             datePickerDialog.show()
         }
@@ -72,12 +85,12 @@ class AddItemFragment : Fragment() {
             pickImageLauncher.launch(arrayOf("image/*"))
         }
 
-
         binding.confirmTransactionButton.setOnClickListener {
             val amountText = binding.amountInput.text.toString().trim()
             val description = binding.descriptionInput.text.toString().trim()
             val date = binding.datePicker.text.toString()
             val isExpense = binding.expenseRadio.isChecked
+
             if (amountText.isEmpty() || description.isEmpty() || date.isEmpty()) {
                 Toast.makeText(requireContext(),
                     getString(R.string.please_fill_in_all_fields), Toast.LENGTH_SHORT)
@@ -85,32 +98,44 @@ class AddItemFragment : Fragment() {
             } else {
                 try {
                     val amount = amountText.toDouble()
-                    val item = Item(
+                    val updatedItem = Item(
+                        //id = viewModel.chosenItem.value?.id ?: 0, // Ensure the item ID is preserved
                         amount = amount,
                         description = description,
                         date = date,
                         photo = imageUri?.toString(),
                         isExpense = isExpense
                     )
-                    viewModel.addItem(item, isExpense)
-                    profileViewModel.updateBudget(item.amount, item.isExpense)// קריאה ל-ViewModel
+
+                    viewModel.updateItem(updatedItem)
+                    // Update the item via ViewModel
+                    profileViewModel.updateBudget(updatedItem.amount, updatedItem.isExpense)
+                    //TODO - Update the budget after edit item
+
+                    val position = arguments?.getInt("itemPosition") ?: -1
+
+                    if (position != -1) {
+                        // Notify the adapter about the change
+                        viewModel.itemUpdatedEvent.value = position
+                    }
+
                     Toast.makeText(requireContext(),
-                        getString(R.string.item_added_successfully), Toast.LENGTH_SHORT)
+                        getString(R.string.item_updated_successfully), Toast.LENGTH_SHORT)
                         .show()
-                    findNavController().navigate(R.id.action_addItemFragment_to_allItemsFragment)
+
+                    findNavController().popBackStack()
                 } catch (e: NumberFormatException) {
                     Toast.makeText(requireContext(),
                         getString(R.string.invalid_amount_format), Toast.LENGTH_SHORT)
                         .show()
                 }
-
-
             }
         }
 
-
+        binding.cancelButton.setOnClickListener {
+            findNavController().navigateUp()  // Navigate back without saving
+        }
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()

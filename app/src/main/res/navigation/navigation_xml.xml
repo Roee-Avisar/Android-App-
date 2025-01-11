@@ -34,10 +34,18 @@
         <action
             android:id="@+id/action_allItemsFragment_to_addItemFragment"
             app:destination="@id/addItemFragment" />
+        <action
+            android:id="@+id/action_allItemsFragment_to_editItemFragment"
+            app:destination="@id/editItemFragment" />
     </fragment>
     <fragment
         android:id="@+id/descriptionFragment"
         android:name="com.example.budgetmanager.DescriptionFragment"
         android:label="item_description_layout"
         tools:layout="@layout/item_description_layout" />
+    <fragment
+        android:id="@+id/editItemFragment"
+        android:name="com.example.budgetmanager.EditItemFragment"
+        android:label="edit_item_fragment"
+        tools:layout="@layout/edit_item_fragment" />
 </navigation>

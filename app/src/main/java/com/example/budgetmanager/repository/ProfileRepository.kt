@@ -3,8 +3,8 @@ package com.example.budgetmanager.repository
 import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.budgetmanager.LocalDB.AppDatabase
 import com.example.budgetmanager.LocalDB.profile.ProfileDao
-import com.example.budgetmanager.LocalDB.profile.ProfileDataBase
 import com.example.budgetmanager.Tables.Profile
 
 class ProfileRepository(application: Application) {
@@ -12,7 +12,7 @@ class ProfileRepository(application: Application) {
     private var profileDao: ProfileDao?
 
     init {
-        val db = ProfileDataBase.getDataBase(application.applicationContext)
+        val db = AppDatabase.getDataBase(application.applicationContext)
         profileDao = db?.profileDao()
     }
     fun insertUserProfile(profile: Profile) {
