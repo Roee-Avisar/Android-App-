@@ -16,6 +16,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.budgetmanager.Tables.Item
 import com.example.budgetmanager.databinding.AllItemLayoutBinding
 import com.example.budgetmanager.viewModel.ItemsViewModel
 import com.example.budgetmanager.viewModel.UserProfileViewModel
@@ -42,15 +43,13 @@ class AllItemsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        profileViewModel.budgetLiveData.observe(viewLifecycleOwner) { currentBudget ->
-            (activity as AppCompatActivity).supportActionBar?.title = "Budget: $${currentBudget}"
-        }
+        updateActionBarTitle()
+        observeViewModels()
 
         binding.addTransactionButton.setOnClickListener {
             findNavController().navigate(R.id.action_allItemsFragment_to_addItemFragment)
         }
 
-        // Observing items from ViewModel
         viewModel.items.observe(viewLifecycleOwner) { items ->
             if (items != null) {
                 binding.recycler.adapter = ItemAdapter(items, object : ItemAdapter.ItemListener {
@@ -80,7 +79,6 @@ class AllItemsFragment : Fragment() {
             }
         }
 
-        // Swipe to delete functionality
         ItemTouchHelper(object : ItemTouchHelper.Callback() {
             override fun getMovementFlags(
                 recyclerView: RecyclerView,
@@ -95,41 +93,17 @@ class AllItemsFragment : Fragment() {
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val item = (binding.recycler.adapter as ItemAdapter).itemAt(viewHolder.adapterPosition)
-                MaterialAlertDialogBuilder(requireContext())
-                    .setTitle("Delete Item")
-                    .setMessage("Are you sure you want to delete this item?")
-                    .setPositiveButton("Yes") { _, _ ->
-                        viewModel.deleteItem(item)
-                    }
-                    .setNegativeButton("Cancel") { dialog, _ ->
-                        // If canceled, notify the adapter to redraw the item
-                        binding.recycler.adapter?.notifyItemChanged(viewHolder.adapterPosition)
-                        dialog.dismiss()
-                    }
-                    .show()
+                showDeleteConfirmationDialog(item, viewHolder.adapterPosition)
+
             }
         }).attachToRecyclerView(binding.recycler)
-
+        updateActionBarTitle()
     }
+
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.main_menu,menu)
         super.onCreateOptionsMenu(menu, inflater)
-    }
-
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.action_delete -> {
-                showDeleteConfirmationDialog()
-                return true
-            }
-            R.id.action_account -> {
-                findNavController().navigate(R.id.action_allItemsFragment_to_profileFragment)
-            }
-        }
-        return super.onOptionsItemSelected(item)
-
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {
@@ -138,9 +112,46 @@ class AllItemsFragment : Fragment() {
         super.onPrepareOptionsMenu(menu)
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_delete -> {
+                showDeleteAllConfirmationDialog()
+                return true
+            }
+            R.id.action_account -> {
+                findNavController().navigate(R.id.action_allItemsFragment_to_profileFragment)
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+
+    }
+    private fun observeViewModels() {
+        profileViewModel.budgetLiveData.observe(viewLifecycleOwner) { budget ->
+            (activity as? AppCompatActivity)?.supportActionBar?.title = getString(R.string.budget, budget.toString())
+        }
+    }
 
 
-    private fun showDeleteConfirmationDialog() {
+
+
+
+    private fun showDeleteConfirmationDialog(item: Item, position: Int) {
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(getString(R.string.delete_item))
+            .setMessage(getString(R.string.are_you_sure_you_want_to_delete_this_item))
+            .setPositiveButton(getString(R.string.yes)) { _, _ ->
+                viewModel.deleteItem(item)
+            }
+            .setNegativeButton(getString(R.string.cancel)) { dialog, _ ->
+                // If canceled, notify the adapter to redraw the item
+                binding.recycler.adapter?.notifyItemChanged(position)
+                dialog.dismiss()
+            }
+            .show()
+    }
+
+    private fun showDeleteAllConfirmationDialog() {
         AlertDialog.Builder(requireContext())
             .setTitle(getString(R.string.delete_all_items))
             .setMessage(getString(R.string.are_you_sure_you_want_to_delete_all_items))
@@ -152,9 +163,17 @@ class AllItemsFragment : Fragment() {
             .setNegativeButton(getString(R.string.no), null)
             .show()
     }
+    private fun updateActionBarTitle() {
+        profileViewModel.budgetLiveData.value?.let { currentBudget ->
+            (activity as? AppCompatActivity)?.supportActionBar?.title =
+                getString(R.string.budget, currentBudget.toString())
+        }
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
 }
