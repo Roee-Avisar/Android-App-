@@ -29,7 +29,7 @@ class ItemsRepository(application: Application) {
         itemDao.deleteItem(item)
     }
 
-    fun getItem(id : Int) = itemDao.getItem(id)
+    fun getItem(id : Int): Item? = itemDao.getItem(id)
 
     fun deleteAll(){
         itemDao.deleteAll()

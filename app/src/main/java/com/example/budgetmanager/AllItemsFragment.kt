@@ -1,5 +1,6 @@
 package com.example.budgetmanager
 
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
@@ -23,6 +24,7 @@ class AllItemsFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: ItemsViewModel by activityViewModels()
+    private val userProfileViewModel: UserProfileModelView by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,29 +45,21 @@ class AllItemsFragment : Fragment() {
             if (items != null) {
                 binding.recycler.adapter = ItemAdapter(items, object : ItemAdapter.ItemListener {
                     override fun onItemClicked(index: Int) {
-                        if (index in items.indices) {
-                            Toast.makeText(
-                                requireContext(),
-                                getString(R.string.clicked_on, items[index].description),
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        } else {
-                            Toast.makeText(
-                                requireContext(),
-                                getString(R.string.invalid_item),
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
+
+                            val item = items[index]
+                            viewModel.setItem(item)
+                            findNavController().navigate(R.id.action_allItemsFragment_to_descriptionFragment)
+
                     }
 
                     override fun onItemLongClick(index: Int) {
-                        val item = items[index]
-                        viewModel.setItem(item)
-                        findNavController().navigate(R.id.action_allItemsFragment_to_descriptionFragment)
+                       //need to add
                     }
                 })
                 binding.recycler.layoutManager = LinearLayoutManager(requireContext())
             }
+
+
         }
 
         // Swipe to delete functionality
@@ -85,10 +79,39 @@ class AllItemsFragment : Fragment() {
                 val item = (binding.recycler.adapter as ItemAdapter).itemAt(viewHolder.adapterPosition)
                 viewModel.deleteItem(item)
             }
+
         }).attachToRecyclerView(binding.recycler)
+        binding.toProfileBtn.setOnClickListener{
+            AlertDialog.Builder(requireContext())
+                .setTitle("move to profile page")
+                .setMessage(" you want move to profile page")
+                .setPositiveButton(getString(R.string.yes)) { _, _ ->
+                    findNavController().navigate(R.id.action_allItemsFragment_to_profileFragment)
+                }
+                .setNegativeButton(getString(R.string.no), null)
+                .show()
+
+        }
+
+
+
+        userProfileViewModel.userProfileLiveData.observe(viewLifecycleOwner){profile ->
+            if (profile != null) {
+                if (!profile.imageUri.isNullOrEmpty()) {
+                    binding.toProfileBtn.setImageURI(Uri.parse(profile.imageUri))
+                }
+            }
+        }
+
+
+
+
 
 
     }
+
+
+
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.main_menu,menu)

@@ -23,9 +23,6 @@ class ItemsViewModel(application: Application) : AndroidViewModel(application) {
         _chosenItem.value = item
     }
 
-    fun deleteItem(item: Item){
-        repository.deleteItem(item)
-    }
 
     fun addItem(item: Item, isExpense: Boolean) {
         repository.addItem(item, isExpense)
@@ -34,6 +31,12 @@ class ItemsViewModel(application: Application) : AndroidViewModel(application) {
     fun deleteAll(){
         repository.deleteAll()
     }
+    fun deleteItem(item: Item){
+        repository.deleteItem(item)
+    }
+
+
+
 
     fun getUserProfile(): Profile? {
         return repository.getUserProfile()

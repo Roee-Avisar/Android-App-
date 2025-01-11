@@ -17,8 +17,10 @@
     <item
         android:id="@+id/action_return"
         android:title="Return"
-        android:icon="@drawable/baseline_arrow_circle_left_24"
+        android:icon="@drawable/baseline_close_24"
         app:showAsAction="always"/>
+
+
 
 
 </menu>

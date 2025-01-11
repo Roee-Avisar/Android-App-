@@ -9,12 +9,21 @@
         android:name="com.example.budgetmanager.AddItemFragment"
         android:label="add_item_layout"
         tools:layout="@layout/add_item_layout" >
-        <action
-            android:id="@+id/action_addItemFragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
+
         <action
             android:id="@+id/action_addItemFragment_to_allItemsFragment"
-            app:destination="@id/allItemsFragment" />
+            app:destination="@id/allItemsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
+        <action
+            android:id="@+id/action_addItemFragment_to_profileFragment"
+            app:destination="@id/profileFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/createAccountFragment"
@@ -24,10 +33,10 @@
         <action
             android:id="@+id/action_createAccountFragment_to_profileFragment"
             app:destination="@id/profileFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -36,13 +45,19 @@
         tools:layout="@layout/profile_layout" >
         <action
             android:id="@+id/action_profileFragment_to_addItemFragment"
-            app:destination="@id/addItemFragment" />
-        <action
-            android:id="@+id/action_profileFragment_to_createAccountFragment"
-            app:destination="@id/createAccountFragment" />
+            app:destination="@id/addItemFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
+
         <action
             android:id="@+id/action_profileFragment_to_allItemsFragment"
-            app:destination="@id/allItemsFragment" />
+            app:destination="@id/allItemsFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
     </fragment>
     <fragment
         android:id="@+id/allItemsFragment"
@@ -51,16 +66,22 @@
         tools:layout="@layout/all_item_layout" >
         <action
             android:id="@+id/action_allItemsFragment_to_descriptionFragment"
-            app:destination="@id/descriptionFragment" />
+            app:destination="@id/descriptionFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/action_allItemsFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/descriptionFragment"
         android:name="com.example.budgetmanager.DescriptionFragment"
         android:label="item_description_layout"
         tools:layout="@layout/item_description_layout" >
+
         <action
             android:id="@+id/action_descriptionFragment_to_allItemsFragment"
             app:destination="@id/allItemsFragment" />

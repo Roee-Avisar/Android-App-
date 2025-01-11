@@ -48,10 +48,16 @@
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="300dp"
                 android:layout_margin="15dp"
                 android:id="@+id/item_photo"
                 />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:id="@+id/delete_transaction_btn"
+                android:text="delete transaction"/>
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>

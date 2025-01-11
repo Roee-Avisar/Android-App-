@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -91,7 +92,7 @@ class AddItemFragment : Fragment() {
                     Toast.makeText(requireContext(),
                         getString(R.string.item_added_successfully), Toast.LENGTH_SHORT)
                         .show()
-                    findNavController().navigate(R.id.action_addItemFragment_to_allItemsFragment)
+
                 } catch (e: NumberFormatException) {
                     Toast.makeText(requireContext(),
                         getString(R.string.invalid_amount_format), Toast.LENGTH_SHORT)
@@ -100,7 +101,20 @@ class AddItemFragment : Fragment() {
 
 
             }
-        }
+            AlertDialog.Builder(requireContext())
+                .setTitle("the transaction add successfully!")
+                .setMessage("where would you like to move?")
+                .setPositiveButton("profile page") { _, _ ->
+                    findNavController().navigate(R.id.action_addItemFragment_to_profileFragment)
+
+                }
+                .setNegativeButton("all transaction page") { _, _ ->
+                    findNavController().navigate(R.id.action_addItemFragment_to_allItemsFragment)
+
+                }.show()
+
+                }
+
 
 
     }
