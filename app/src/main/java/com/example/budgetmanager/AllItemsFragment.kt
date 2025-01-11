@@ -167,7 +167,17 @@ class AllItemsFragment : Fragment() {
             .setTitle(getString(R.string.delete_all_items))
             .setMessage(getString(R.string.are_you_sure_you_want_to_delete_all_items))
             .setPositiveButton(getString(R.string.yes)) { _, _ ->
+
+                val allItems = viewModel.items.value ?: emptyList()
+                allItems.forEach { item ->
+                    if (item.isExpense) {
+                        profileViewModel.updateBudget(item.amount, isExpense = false)
+                    } else {
+                        profileViewModel.updateBudget(item.amount, isExpense = true)
+                    }
+                }
                 viewModel.deleteAll()
+
                 Toast.makeText(requireContext(),
                     getString(R.string.all_items_deleted), Toast.LENGTH_SHORT).show()
             }
