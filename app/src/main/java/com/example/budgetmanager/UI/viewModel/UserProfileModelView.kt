@@ -73,14 +73,9 @@ class UserProfileViewModel(application: Application) : AndroidViewModel(applicat
 
 
     fun updateBudget(amount: Double, isExpense: Boolean) {
-        if (amount <= 0) {
-            // Log or handle invalid amount
-            return
-        }
-
         _userProfileLiveData.value?.let { currentProfile ->
             val newBudget = if (isExpense) {
-                _expensesLiveData.value = (_expensesLiveData.value ?: 0.0) + amount
+                _expensesLiveData.value = (_expensesLiveData.value ?: 0.0) - amount
                 currentProfile.initialBudget - amount
             } else {
                 _incomeLiveData.value = (_incomeLiveData.value ?: 0.0) + amount

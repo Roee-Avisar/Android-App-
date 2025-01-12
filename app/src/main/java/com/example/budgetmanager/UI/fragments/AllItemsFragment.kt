@@ -1,7 +1,9 @@
 package com.example.budgetmanager.UI.fragments
 
+import ItemAdapter
 import android.content.res.Configuration
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -11,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -18,7 +21,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.budgetmanager.ItemAdapter
 import com.example.budgetmanager.R
 import com.example.budgetmanager.Tables.Item
 import com.example.budgetmanager.databinding.AllItemLayoutBinding
@@ -33,6 +35,8 @@ class AllItemsFragment : Fragment() {
 
     private val viewModel: ItemsViewModel by activityViewModels()
     private val profileViewModel: UserProfileViewModel by activityViewModels()
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -50,7 +54,6 @@ class AllItemsFragment : Fragment() {
 
         updateActionBarTitle()
         observeViewModels()
-
 
         val isLandscape = resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
         val layoutManager = if (isLandscape) {
@@ -86,6 +89,7 @@ class AllItemsFragment : Fragment() {
                                 dialog.dismiss()
                             }
                             .show()
+
             }
                 })
               binding.recycler.layoutManager = LinearLayoutManager(requireContext())
@@ -191,6 +195,7 @@ class AllItemsFragment : Fragment() {
                 getString(R.string.budget, currentBudget.toString())
         }
     }
+
 
 
     override fun onDestroyView() {

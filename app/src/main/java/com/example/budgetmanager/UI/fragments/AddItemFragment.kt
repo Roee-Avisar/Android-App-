@@ -126,7 +126,7 @@ class AddItemFragment : Fragment() {
                     profileViewModel.updateBudget(
                         item.amount,
                         item.isExpense
-                    )// קריאה ל-ViewModel
+                    )
                     Toast.makeText(
                         requireContext(),
                         getString(R.string.item_added_successfully), Toast.LENGTH_SHORT

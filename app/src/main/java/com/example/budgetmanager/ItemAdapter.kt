@@ -1,20 +1,18 @@
-package com.example.budgetmanager
-
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.example.budgetmanager.Tables.Item
-import com.example.budgetmanager.databinding.AddItemLayoutBinding
-import com.example.budgetmanager.databinding.ItemLayoutBinding
 import com.bumptech.glide.Glide
+import com.example.budgetmanager.R
+import com.example.budgetmanager.Tables.Item
+import com.example.budgetmanager.databinding.ItemLayoutBinding
 
 class ItemAdapter(val items: List<Item>, val callBack: ItemListener)
     : RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
 
-    interface ItemListener{
+    interface ItemListener {
         fun onItemClicked(index: Int)
         fun onItemLongClick(index: Int)
     }

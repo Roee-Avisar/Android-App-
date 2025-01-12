@@ -1,6 +1,7 @@
 package com.example.budgetmanager.repository
 
 import android.app.Application
+import androidx.lifecycle.LiveData
 import com.example.budgetmanager.LocalDB.AppDatabase
 import com.example.budgetmanager.LocalDB.item.ItemDao
 import com.example.budgetmanager.LocalDB.profile.ProfileDao
@@ -18,7 +19,7 @@ class ItemsRepository(application: Application) {
         profileDao = db.profileDao()
     }
 
-    fun getItems() = itemDao.getItems()
+    fun getItems(): LiveData<List<Item>> = itemDao.getItems()
 
     fun addItem(item: Item, isExpense: Boolean) {
         itemDao.addItem(item)

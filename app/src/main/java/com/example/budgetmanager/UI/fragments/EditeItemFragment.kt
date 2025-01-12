@@ -27,6 +27,7 @@ class EditItemFragment : Fragment() {
 
     private val viewModel: ItemsViewModel by activityViewModels()
     private val profileViewModel: UserProfileViewModel by activityViewModels()
+    private var itemToUpdate: Item? = null
 
     private var imageUri: Uri? = null
     private val pickImageLauncher: ActivityResultLauncher<Array<String>> =
@@ -64,6 +65,7 @@ class EditItemFragment : Fragment() {
                     imageUri = Uri.parse(photoUri)
                 }
                 binding.expenseRadio.isChecked = it.isExpense
+                itemToUpdate = it
             }
         }
 
@@ -99,21 +101,22 @@ class EditItemFragment : Fragment() {
                 try {
                     val amount = amountText.toDouble()
                     val updatedItem = Item(
-                        //id = viewModel.chosenItem.value?.id ?: 0, // Ensure the item ID is preserved
                         amount = amount,
                         description = description,
                         date = date,
                         photo = imageUri?.toString(),
                         isExpense = isExpense
                     )
-
-                    viewModel.updateItem(updatedItem)
-                    // Update the item via ViewModel
-                    profileViewModel.updateBudget(updatedItem.amount, updatedItem.isExpense)
-                    //TODO - Update the budget after edit item
-
-
-                    findNavController().popBackStack()
+                    if (updatedItem != null) {
+                        viewModel.updateItem(updatedItem, itemToUpdate!!)
+                        profileViewModel.updateBudget(updatedItem.amount, updatedItem.isExpense)
+                        Toast.makeText(
+                            requireContext(),
+                            getString(R.string.item_updated_successfully),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        findNavController().popBackStack()
+                    }
                 } catch (e: NumberFormatException) {
                     Toast.makeText(requireContext(),
                         getString(R.string.invalid_amount_format), Toast.LENGTH_SHORT)
