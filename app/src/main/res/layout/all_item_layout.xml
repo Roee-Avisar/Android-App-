@@ -10,7 +10,7 @@
         android:id="@+id/text_message"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Click on the plus to add your movements"
+        android:text="@string/click_on_the_plus_to_add_your_movements"
         android:textStyle="bold"
         android:textSize="16sp"
         android:gravity="center"

@@ -8,6 +8,7 @@
     <string name="description">תאור</string>
     <string name="select_date">בחירת תאריך</string>
     <string name="add_photo">הוספת תמונה</string>
+    <string name="selected_image_placeholder">בחירת מחולל לתמונה</string>
     <string name="confirm">אישור</string>
     <string name="create_account">יצירת חשבון</string>
     <string name="upload_image">העלאת תמונה</string>
@@ -16,6 +17,7 @@
     <string name="initial_budget">תקציב ראשוני</string>
     <string name="save_user">שמור משתמש</string>
     <string name="item_description">תיאור הפריט</string>
+    <string name="item_detailed_amount">מספר פריטים</string>
     <string name="date">תאריך</string>
     <string name="user_name">שם משתמש</string>
     <string name="total_budget">תקציב כולל:</string>
@@ -46,13 +48,20 @@
     <string name="are_you_sure_you_want_to_delete_this_item">אתה בטוח שאתה רוצה את הפריט הזה</string>
     <string name="delete_item">מחק פריט</string>
     <string name="image_selection_canceled">בחירת תמונה התבטלה</string>
-    <string name="budget">₪%s :תקציב</string>
+    <string name="budget">תקציב : ₪%s</string>
     <string name="edit_item">עריכת פריט</string>
     <string name="do_you_want_to_edit_this_item">האם אתה רוצה לערוך פריט?</string>
     <string name="edit">עריכה</string>
     <string name="item_updated_successfully">פריט עודכן בהצלחה</string>
-    <string name="budget_2">₪%s :תקציב</string>
-    <string name="budget_3">₪%s :תקציב</string>
+    <string name="budget_2">תקציב : ₪%s</string>
+    <string name="budget_3">תקציב : ₪%s</string>
+    <string name="welcome_to_your_budget_manager_here_you_can_add_your_transactions_and_take_control_of_your_finances">ברוכים הבאים למנהל התקציב, כאן תוכלו לעקוב אחר ההכנסות וההוצאות שלכם</string>
     <string name="welcome_to_your_budget_manager_nhere_you_can_add_your_transactions_and_take_control_of_your_finances">ברוכים הבאים למנהל התקציב שלכם! כאן תוכלו להוסיף את העסקאות שלכם ולשלוט על הכספים שלכם.</string>
+    <string name="click_on_the_plus_to_add_your_movements">לחצו על הפלוס להוספת תנועות</string>
+    <string name="exit_account">יציאה מהפרופיל</string>
+    <string name="delete_all">מחק הכל</string>
+    <string name="account">משתמש</string>
+    <string name="welcome_to_budget_manager">ברוכים הבאים למנהל תקציב</string>
+    <string name="budget_manager_profile">פרופיל</string>
 
 </resources>

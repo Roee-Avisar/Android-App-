@@ -45,7 +45,8 @@ class CreateAccountFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as? AppCompatActivity)?.supportActionBar?.title = "Welcome to Budget Manager"
+        (activity as? AppCompatActivity)?.supportActionBar?.title =
+            getString(R.string.welcome_to_budget_manager)
 
 
         binding.uploadImageButton.setOnClickListener {

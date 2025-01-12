@@ -39,7 +39,8 @@ class ProfileFragment : Fragment() {
         } else {
             Log.d("ProfileFragment", "Loaded portrait layout")
         }
-        (activity as? AppCompatActivity)?.supportActionBar?.title = "Budget Manager Profile"
+        (activity as? AppCompatActivity)?.supportActionBar?.title =
+            getString(R.string.budget_manager_profile)
         _binding = ProfileLayoutBinding.inflate(inflater, container, false)
         (activity as? AppCompatActivity)?.supportActionBar?.setDisplayHomeAsUpEnabled(false)
         return binding.root

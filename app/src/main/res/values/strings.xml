@@ -8,7 +8,7 @@
     <string name="description">Description</string>
     <string name="select_date">Select Date</string>
     <string name="add_photo">Add Photo</string>
-    <string name="selected_image_placeholder" translatable="false">Selected Image Placeholder</string>
+    <string name="selected_image_placeholder">Selected Image Placeholder</string>
     <string name="confirm">Confirm</string>
     <string name="create_account">Create Account</string>
     <string name="upload_image">Upload Image</string>
@@ -17,7 +17,7 @@
     <string name="initial_budget">Initial Budget</string>
     <string name="save_user">Save User</string>
     <string name="item_description">Item description</string>
-    <string name="item_detailed_amount" translatable="false">Item detailed amount</string>
+    <string name="item_detailed_amount">Item detailed amount</string>
     <string name="date">Date</string>
     <string name="user_name">User Name</string>
     <string name="total_budget">Total Budget:</string>
@@ -57,5 +57,12 @@
     <string name="app_db" translatable="false">app_db</string>
     <string name="budget_2">Budget: $%1$s</string>
     <string name="budget_3">Budget: $%1$s</string>
-    <string name="welcome_to_your_budget_manager_nhere_you_can_add_your_transactions_and_take_control_of_your_finances">Welcome to your budget manager!\nHere, you can add your transactions and take control of your finances.</string>
+    <string name="welcome_to_your_budget_manager_here_you_can_add_your_transactions_and_take_control_of_your_finances">Welcome to your budget manager!\nHere, you can add your transactions and take control of your finances.</string>
+    <string name="welcome_to_your_budget_manager_nhere_you_can_add_your_transactions_and_take_control_of_your_finances">Welcom to your budget manager, here you can add transactions and take control of your finances</string>
+    <string name="click_on_the_plus_to_add_your_movements">Click on the plus to add your movements</string>
+    <string name="exit_account">Exit Account</string>
+    <string name="delete_all">Delete all</string>
+    <string name="account">Account</string>
+    <string name="welcome_to_budget_manager">Welcome to Budget Manager</string>
+    <string name="budget_manager_profile">Budget Manager Profile</string>
 </resources>

@@ -4,19 +4,19 @@
 
     <item
         android:id="@+id/action_exit"
-        android:title="Exit Account"
+        android:title="@string/exit_account"
         android:icon="@drawable/baseline_close_24"
         app:showAsAction="always"/>
 
     <item
         android:id="@+id/action_delete"
         android:icon="@drawable/baseline_backspace_24"
-        android:title="Delete all"
+        android:title="@string/delete_all"
         app:showAsAction="always" />
 
     <item
         android:id="@+id/action_account"
-        android:title="Account"
+        android:title="@string/account"
         android:icon="@drawable/baseline_account_circle_24"
         app:showAsAction="always"/>
 
