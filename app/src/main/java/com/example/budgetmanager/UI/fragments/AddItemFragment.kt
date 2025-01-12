@@ -51,7 +51,8 @@ class AddItemFragment : Fragment() {
         _binding = AddItemLayoutBinding.inflate(inflater, container, false)
         (activity as? AppCompatActivity)?.supportActionBar?.setDisplayHomeAsUpEnabled(false)
         profileViewModel.budgetLiveData.observe(viewLifecycleOwner) { currentBudget ->
-            (activity as AppCompatActivity).supportActionBar?.title = "Budget: $${currentBudget}"
+            (activity as AppCompatActivity).supportActionBar?.title =
+                getString(R.string.budget_2, currentBudget.toString())
         }
         return binding.root
     }

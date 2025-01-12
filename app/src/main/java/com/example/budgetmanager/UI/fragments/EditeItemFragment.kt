@@ -50,16 +50,15 @@ class EditItemFragment : Fragment() {
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         profileViewModel.budgetLiveData.observe(viewLifecycleOwner) { currentBudget ->
-            (activity as AppCompatActivity).supportActionBar?.title = "Budget: $${currentBudget}"
+            (activity as AppCompatActivity).supportActionBar?.title =
+                getString(R.string.budget_3, currentBudget.toString())
         }
 
-        // Populate fields with the current item's data
         viewModel.chosenItem.observe(viewLifecycleOwner) { item ->
             item?.let {
                 binding.amountInput.setText(it.amount.toString())
                 binding.descriptionInput.setText(it.description)
                 binding.datePicker.setText(it.date)
-                // Set image if available
                 it.photo?.let { photoUri ->
                     binding.selectedImage.setImageURI(Uri.parse(photoUri))
                     imageUri = Uri.parse(photoUri)
@@ -126,7 +125,7 @@ class EditItemFragment : Fragment() {
         }
 
         binding.cancelButton.setOnClickListener {
-            findNavController().navigateUp()  // Navigate back without saving
+            findNavController().navigateUp()
         }
     }
 

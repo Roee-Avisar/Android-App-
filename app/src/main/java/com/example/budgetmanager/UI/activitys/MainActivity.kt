@@ -22,37 +22,29 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
-        // Initialize ViewModel and ProfileRepository
         userProfileViewModel = ViewModelProvider(this).get(UserProfileViewModel::class.java)
         profileRepository = ProfileRepository(application)
 
-        // הגדרת Toolbar
         val toolbar: androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(true)
 
-        // קבלת NavController
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         navController = navHostFragment.navController
 
         userProfileViewModel.userProfileLiveData.observe(this, { existingProfile ->
             if (existingProfile == null) {
-                // If no profile exists, navigate to AccountCreationActivity
                 val intent = Intent(this, AccountCreationActivity::class.java)
                 startActivity(intent)
                 finish()
             } else {
-                // If profile exists, show AllItemsFragment (home screen)
                 val appBarConfiguration = AppBarConfiguration(navController.graph)
                 setupActionBarWithNavController(navController, appBarConfiguration)
 
-                // Navigate to the AllItemsFragment (or ensure the fragment is loaded)
                 if (savedInstanceState == null && navController.currentDestination?.id == null) {
                     navController.navigate(R.id.allItemsFragment)
                 }
             }
-            // התאמת Toolbar ל-Navigation Component
             val appBarConfiguration = AppBarConfiguration(navController.graph)
             setupActionBarWithNavController(navController, appBarConfiguration)
 

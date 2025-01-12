@@ -54,4 +54,7 @@
     <string name="do_you_want_to_edit_this_item">Do you want to edit this item?</string>
     <string name="edit">Edit</string>
     <string name="item_updated_successfully">Item update successfully</string>
+    <string name="app_db" translatable="false">app_db</string>
+    <string name="budget_2">Budget: $%1$s</string>
+    <string name="budget_3">Budget: $%1$s</string>
 </resources>

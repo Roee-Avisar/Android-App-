@@ -57,9 +57,9 @@ class AllItemsFragment : Fragment() {
 
         val isLandscape = resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
         val layoutManager = if (isLandscape) {
-            GridLayoutManager(requireContext(), 2) // Grid בתצוגת רוחב
+            GridLayoutManager(requireContext(), 2)
         } else {
-            LinearLayoutManager(requireContext()) // Linear בתצוגת אנכי
+            LinearLayoutManager(requireContext())
         }
         binding.recycler.layoutManager = layoutManager
 

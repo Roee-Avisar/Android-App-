@@ -6,6 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.budgetmanager.LocalDB.item.ItemDao
 import com.example.budgetmanager.LocalDB.profile.ProfileDao
+import com.example.budgetmanager.R
 import com.example.budgetmanager.Tables.Item
 import com.example.budgetmanager.Tables.Profile
 
@@ -25,7 +26,7 @@ abstract class AppDatabase : RoomDatabase() {
                 val newInstance = Room.databaseBuilder(
                     context.applicationContext,
                     AppDatabase::class.java,
-                    "app_db" // New database name
+                    context.getString(R.string.app_db) // New database name
                 )
                     .fallbackToDestructiveMigration()
                     .allowMainThreadQueries() // You may want to consider handling this more carefully in a production app

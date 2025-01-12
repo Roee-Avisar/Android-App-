@@ -15,7 +15,6 @@ class ItemsViewModel(application: Application) : AndroidViewModel(application) {
     private val repository = ItemsRepository(application)
     val items: LiveData<List<Item>> = repository.getItems()
     private val profileRepo = ProfileRepository(application)
-
     private val _chosenItem = MutableLiveData<Item>()
     val chosenItem : LiveData<Item> get() = _chosenItem
 

@@ -57,9 +57,9 @@ class ProfileFragment : Fragment() {
                 binding.incomeValue.text = userProfileViewModel.incomeLiveData.value.toString()
                 if (!profile.imageUri.isNullOrEmpty()) {
                     Glide.with(binding.root.context)
-                        .load(Uri.parse(profile.imageUri)) // Load the image from the URI
+                        .load(Uri.parse(profile.imageUri))
                         .placeholder(R.drawable.ic_launcher_background)
-                        .circleCrop()// Default image while loading
+                        .circleCrop()
                         .into(binding.profileImage)
                 }
 

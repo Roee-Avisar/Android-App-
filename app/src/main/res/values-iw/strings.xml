@@ -45,5 +45,13 @@
     <string name="cancel">ביטול</string>
     <string name="are_you_sure_you_want_to_delete_this_item">אתה בטוח שאתה רוצה את הפריט הזה</string>
     <string name="delete_item">מחק פריט</string>
+    <string name="image_selection_canceled">בחירת תמונה התבטלה</string>
+    <string name="budget">$%s :תקציב</string>
+    <string name="edit_item">עריכת פריט</string>
+    <string name="do_you_want_to_edit_this_item">האם אתה רוצה לערוך פריט?</string>
+    <string name="edit">עריכה</string>
+    <string name="item_updated_successfully">פריט עודכן בהצלחה</string>
+    <string name="budget_2">$%s :תקציב</string>
+    <string name="budget_3">$%s :תקציב</string>
 
 </resources>
