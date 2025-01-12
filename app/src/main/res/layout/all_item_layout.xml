@@ -6,25 +6,37 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".UI.fragments.AllItemsFragment">
 
+    <TextView
+        android:id="@+id/text_message"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Click on the plus to add your movements"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:padding="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:clipToPadding="false"
+        app:layout_constraintTop_toBottomOf="@id/text_message"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/add_transaction_button" />
 
-        />
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add_transaction_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/baseline_add_24"
         android:layout_margin="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:id="@+id/add_transaction_button"
-        app:backgroundTint="@color/purple"/>
-
-
-
+        app:backgroundTint="@color/purple" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

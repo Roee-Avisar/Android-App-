@@ -47,6 +47,22 @@ class EditItemFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        savedInstanceState?.let {
+            val itemId = it.getInt("itemId", -1)
+            if (itemId != -1) {
+                viewModel.getItemById(itemId)?.let { item ->
+                    itemToUpdate = item
+                }
+            }
+
+            binding.amountInput.setText(it.getString("amount", ""))
+            binding.descriptionInput.setText(it.getString("description", ""))
+            binding.datePicker.setText(it.getString("date", ""))
+            imageUri = it.getString("imageUri")?.let { uri -> Uri.parse(uri) }
+            imageUri?.let { uri -> binding.selectedImage.setImageURI(uri) }
+            binding.expenseRadio.isChecked = it.getBoolean("isExpense", false)
+        }
+
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         profileViewModel.budgetLiveData.observe(viewLifecycleOwner) { currentBudget ->
@@ -55,16 +71,18 @@ class EditItemFragment : Fragment() {
         }
 
         viewModel.chosenItem.observe(viewLifecycleOwner) { item ->
-            item?.let {
-                binding.amountInput.setText(it.amount.toString())
-                binding.descriptionInput.setText(it.description)
-                binding.datePicker.setText(it.date)
-                it.photo?.let { photoUri ->
-                    binding.selectedImage.setImageURI(Uri.parse(photoUri))
-                    imageUri = Uri.parse(photoUri)
+            if (savedInstanceState == null) {
+                item?.let {
+                    binding.amountInput.setText(it.amount.toString())
+                    binding.descriptionInput.setText(it.description)
+                    binding.datePicker.setText(it.date)
+                    it.photo?.let { photoUri ->
+                        binding.selectedImage.setImageURI(Uri.parse(photoUri))
+                        imageUri = Uri.parse(photoUri)
+                    }
+                    binding.expenseRadio.isChecked = it.isExpense
+                    itemToUpdate = it
                 }
-                binding.expenseRadio.isChecked = it.isExpense
-                itemToUpdate = it
             }
         }
 
@@ -87,39 +105,35 @@ class EditItemFragment : Fragment() {
         }
 
         binding.confirmTransactionButton.setOnClickListener {
+//            if (itemToUpdate == null) {
+//                Toast.makeText(requireContext(), getString(R.string.item_not_found), Toast.LENGTH_SHORT).show()
+//                return@setOnClickListener
+//            }
+
             val amountText = binding.amountInput.text.toString().trim()
             val description = binding.descriptionInput.text.toString().trim()
             val date = binding.datePicker.text.toString()
             val isExpense = binding.expenseRadio.isChecked
 
             if (amountText.isEmpty() || description.isEmpty() || date.isEmpty()) {
-                Toast.makeText(requireContext(),
-                    getString(R.string.please_fill_in_all_fields), Toast.LENGTH_SHORT)
-                    .show()
+                Toast.makeText(requireContext(), getString(R.string.please_fill_in_all_fields), Toast.LENGTH_SHORT).show()
             } else {
                 try {
                     val amount = amountText.toDouble()
                     val updatedItem = Item(
+                        id = itemToUpdate!!.id, // שימור ה-ID המקורי
                         amount = amount,
                         description = description,
                         date = date,
                         photo = imageUri?.toString(),
                         isExpense = isExpense
                     )
-                    if (updatedItem != null) {
-                        viewModel.updateItem(updatedItem, itemToUpdate!!)
-                        profileViewModel.updateBudget(updatedItem.amount, updatedItem.isExpense)
-                        Toast.makeText(
-                            requireContext(),
-                            getString(R.string.item_updated_successfully),
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        findNavController().popBackStack()
-                    }
+                    viewModel.updateItem(updatedItem, itemToUpdate!!)
+                    profileViewModel.updateBudget(updatedItem.amount, updatedItem.isExpense)
+                    Toast.makeText(requireContext(), getString(R.string.item_updated_successfully), Toast.LENGTH_SHORT).show()
+                    findNavController().popBackStack()
                 } catch (e: NumberFormatException) {
-                    Toast.makeText(requireContext(),
-                        getString(R.string.invalid_amount_format), Toast.LENGTH_SHORT)
-                        .show()
+                    Toast.makeText(requireContext(), getString(R.string.invalid_amount_format), Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -128,6 +142,17 @@ class EditItemFragment : Fragment() {
             findNavController().navigateUp()
         }
     }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt("itemId", itemToUpdate?.id ?: -1) // שמירת ה-ID של הפריט
+        outState.putString("amount", binding.amountInput.text.toString())
+        outState.putString("description", binding.descriptionInput.text.toString())
+        outState.putString("date", binding.datePicker.text.toString())
+        outState.putString("imageUri", imageUri?.toString())
+        outState.putBoolean("isExpense", binding.expenseRadio.isChecked)
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

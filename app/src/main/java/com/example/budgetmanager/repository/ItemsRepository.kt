@@ -42,4 +42,5 @@ class ItemsRepository(application: Application) {
     fun updateItem(updatedItem: Item, isExpense: Boolean) {
         itemDao.update(updatedItem)
     }
+
 }

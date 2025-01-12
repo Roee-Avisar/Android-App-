@@ -57,4 +57,5 @@
     <string name="app_db" translatable="false">app_db</string>
     <string name="budget_2">Budget: $%1$s</string>
     <string name="budget_3">Budget: $%1$s</string>
+    <string name="welcome_to_your_budget_manager_nhere_you_can_add_your_transactions_and_take_control_of_your_finances">Welcome to your budget manager!\nHere, you can add your transactions and take control of your finances.</string>
 </resources>

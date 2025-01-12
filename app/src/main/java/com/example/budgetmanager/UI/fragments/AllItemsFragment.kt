@@ -92,7 +92,7 @@ class AllItemsFragment : Fragment() {
 
             }
                 })
-              binding.recycler.layoutManager = LinearLayoutManager(requireContext())
+            //  binding.recycler.layoutManager = LinearLayoutManager(requireContext())
             }
         }
 

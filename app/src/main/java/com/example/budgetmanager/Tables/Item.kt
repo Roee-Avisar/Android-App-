@@ -11,6 +11,10 @@ import java.util.Date
 @Parcelize
 @Entity(tableName = "item")
 data class Item(
+
+    @PrimaryKey(autoGenerate = true)
+    val id : Int = 0,
+
     @ColumnInfo(name = "price")
     val amount: Double,
 
@@ -27,6 +31,5 @@ data class Item(
     val  isExpense : Boolean)
     : Parcelable {
 
-    @PrimaryKey(autoGenerate = true)
-    var id : Int = 0
+
 }

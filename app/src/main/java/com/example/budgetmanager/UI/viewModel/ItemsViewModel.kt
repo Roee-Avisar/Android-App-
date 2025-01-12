@@ -34,6 +34,10 @@ class ItemsViewModel(application: Application) : AndroidViewModel(application) {
         repository.deleteAll()
     }
 
+    fun getItemById(id: Int): Item? {
+        return repository.getItem(id)
+    }
+
     fun updateItem(updatedItem: Item, oldItem: Item) {
         repository.deleteItem(oldItem)
         profileRepo.updateBudget(oldItem.amount * -2, oldItem.isExpense)
