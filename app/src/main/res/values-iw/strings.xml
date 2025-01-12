@@ -42,4 +42,17 @@
     <string name="no_budget_available">אין תקציב זמין</string>
     <string name="exit_this_profile">צא מפרופיל זה</string>
     <string name="invalid_item">פריט לא תקין</string>
+    <string name="cancel">ביטול</string>
+    <string name="are_you_sure_you_want_to_delete_this_item">אתה בטוח שאתה רוצה את הפריט הזה</string>
+    <string name="delete_item">מחק פריט</string>
+    <string name="image_selection_canceled">בחירת תמונה התבטלה</string>
+    <string name="budget">₪%s :תקציב</string>
+    <string name="edit_item">עריכת פריט</string>
+    <string name="do_you_want_to_edit_this_item">האם אתה רוצה לערוך פריט?</string>
+    <string name="edit">עריכה</string>
+    <string name="item_updated_successfully">פריט עודכן בהצלחה</string>
+    <string name="budget_2">₪%s :תקציב</string>
+    <string name="budget_3">₪%s :תקציב</string>
+    <string name="welcome_to_your_budget_manager_nhere_you_can_add_your_transactions_and_take_control_of_your_finances">ברוכים הבאים למנהל התקציב שלכם! כאן תוכלו להוסיף את העסקאות שלכם ולשלוט על הכספים שלכם.</string>
+
 </resources>

@@ -1,14 +1,17 @@
-package com.example.budgetmanager
+package com.example.budgetmanager.UI.fragments
 
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.example.budgetmanager.Tables.Item
+import com.example.budgetmanager.R
 import com.example.budgetmanager.databinding.ItemDescriptionLayoutBinding
+import com.example.budgetmanager.UI.viewModel.ItemsViewModel
 
 class DescriptionFragment : Fragment() {
 
@@ -25,12 +28,14 @@ class DescriptionFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = ItemDescriptionLayoutBinding.inflate(inflater, container, false)
+        (activity as? AppCompatActivity)?.supportActionBar?.setDisplayHomeAsUpEnabled(false)
         return binding.root
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as? AppCompatActivity)?.supportActionBar?.title = ""
         viewModel.chosenItem.observe(viewLifecycleOwner) {
             binding.itemDescription.text = it.description
             binding.itemValue.text = it.amount.toString()
@@ -41,8 +46,15 @@ class DescriptionFragment : Fragment() {
             } else {
                 binding.itemPhoto.setImageResource(R.drawable.ic_launcher_foreground)
             }
-
-
+            val cardView = binding.root.findViewById<com.google.android.material.card.MaterialCardView>(
+                R.id.description_card_view
+            )
+            val strokColor = if (it.isExpense) {
+                ContextCompat.getColor(binding.root.context, R.color.red)
+            } else {
+                ContextCompat.getColor(binding.root.context, R.color.green)
+            }
+            cardView.strokeColor = strokColor
         }
     }
 

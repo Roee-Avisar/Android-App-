@@ -1,4 +1,4 @@
-package com.example.budgetmanager
+package com.example.budgetmanager.UI.fragments
 
 import android.content.Intent
 import android.net.Uri
@@ -9,11 +9,14 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.findNavController
+import com.example.budgetmanager.R
 import com.example.budgetmanager.Tables.Profile
+import com.example.budgetmanager.UI.activitys.MainActivity
 import com.example.budgetmanager.databinding.CreateAccountLayoutBinding
+import com.example.budgetmanager.UI.viewModel.UserProfileViewModel
 
 
 class CreateAccountFragment : Fragment() {
@@ -22,7 +25,7 @@ class CreateAccountFragment : Fragment() {
     private val binding get() = _binding!!
 
     private var imageUri : Uri? = null
-    private val userProfileViewModel: UserProfileModelView by activityViewModels()
+    private val userProfileViewModel: UserProfileViewModel by activityViewModels()
 
     private val pickImageLauncher : ActivityResultLauncher<Array<String>> =
         registerForActivityResult(ActivityResultContracts.OpenDocument()){
@@ -42,6 +45,7 @@ class CreateAccountFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as? AppCompatActivity)?.supportActionBar?.title = "Welcome to Budget Manager"
 
 
         binding.uploadImageButton.setOnClickListener {
@@ -78,7 +82,8 @@ class CreateAccountFragment : Fragment() {
             Toast.makeText(requireContext(),
                 getString(R.string.profile_created_successfully), Toast.LENGTH_SHORT)
                 .show()
-            findNavController().navigate(R.id.action_createAccountFragment_to_profileFragment)
+            startActivity(Intent(requireContext(), MainActivity::class.java))
+            activity?.finish()
         }
     }
 

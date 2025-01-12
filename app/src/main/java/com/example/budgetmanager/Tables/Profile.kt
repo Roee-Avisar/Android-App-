@@ -11,5 +11,4 @@ data class Profile(
     val lastName : String,
     var initialBudget : Double,
     val imageUri : String? = null
-
 )

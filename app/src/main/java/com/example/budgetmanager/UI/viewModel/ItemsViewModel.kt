@@ -1,4 +1,4 @@
-package com.example.budgetmanager
+package com.example.budgetmanager.UI.viewModel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -15,7 +15,6 @@ class ItemsViewModel(application: Application) : AndroidViewModel(application) {
     private val repository = ItemsRepository(application)
     val items: LiveData<List<Item>> = repository.getItems()
     private val profileRepo = ProfileRepository(application)
-
     private val _chosenItem = MutableLiveData<Item>()
     val chosenItem : LiveData<Item> get() = _chosenItem
 
@@ -35,20 +34,17 @@ class ItemsViewModel(application: Application) : AndroidViewModel(application) {
         repository.deleteAll()
     }
 
-    fun getUserProfile(): Profile? {
-        return repository.getUserProfile()
+    fun getItemById(id: Int): Item? {
+        return repository.getItem(id)
     }
 
-    fun updateBudget(amount: Double, isExpense: Boolean){
-        val currentProfile = repository.getUserProfile()
-        if (currentProfile != null){
-            if(isExpense) {
-                currentProfile.initialBudget -= amount
-            }
-            else{
-                currentProfile.initialBudget += amount
-            }
-            profileRepo.insertUserProfile(currentProfile)
-        }
+    fun updateItem(updatedItem: Item, oldItem: Item) {
+        repository.deleteItem(oldItem)
+        profileRepo.updateBudget(oldItem.amount * -2, oldItem.isExpense)
+        repository.addItem(updatedItem, updatedItem.isExpense)
+        profileRepo.updateBudget(updatedItem.amount, updatedItem.isExpense)
     }
+
+
+
 }

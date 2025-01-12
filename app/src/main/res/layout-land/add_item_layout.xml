@@ -1,0 +1,113 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".UI.fragments.AddItemFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <RadioGroup
+            android:id="@+id/transaction_type_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="16dp">
+
+            <RadioButton
+                android:id="@+id/income_radio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/income"
+                android:textSize="16sp"
+                android:textColor="#444444"
+                android:checked="true" />
+
+            <RadioButton
+                android:id="@+id/expense_radio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/expense"
+                android:layout_marginStart="24dp"
+                android:textSize="16sp"
+                android:textColor="#444444" />
+        </RadioGroup>
+
+        <EditText
+            android:id="@+id/amount_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:hint="@string/enter_amount"
+            android:inputType="numberDecimal"
+            android:textSize="18sp"
+            android:background="#FFFFFF"
+            android:padding="10dp" />
+
+        <EditText
+            android:id="@+id/description_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:hint="@string/description"
+            android:inputType="text"
+            android:textSize="18sp"
+            android:background="#FFFFFF"
+            android:padding="10dp" />
+
+        <EditText
+            android:id="@+id/date_picker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:hint="@string/select_date"
+            android:inputType="text"
+            android:textSize="18sp"
+            android:background="#FFFFFF"
+            android:padding="10dp"
+            android:focusable="false" />
+
+        <Button
+            android:id="@+id/take_photo_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="@string/add_photo"
+            android:layout_gravity="center"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:backgroundTint="@color/purple"
+            android:textColor="#FFFFFF"
+            android:padding="12dp" />
+
+        <ImageView
+            android:id="@+id/selected_image"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="16dp"
+            android:scaleType="centerCrop"
+            android:background="#E0E0E0"
+            android:contentDescription="@string/selected_image_placeholder" />
+
+        <Button
+            android:id="@+id/confirm_transaction_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="@string/confirm"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:backgroundTint="@color/purple"
+            android:textColor="#FFFFFF"
+            android:padding="12dp" />
+
+    </LinearLayout>
+</ScrollView>

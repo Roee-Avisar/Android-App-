@@ -45,4 +45,17 @@
     <string name="are_you_sure_you_want_to_exit_your_profile_all_the_data_will_be_deleted">Are you sure you want to exit your profile ? all the data will be deleted</string>
     <string name="an_error_occurred_22">An error occurred:</string>
     <string name="invalid_item">invalid item</string>
+    <string name="cancel">Cancel</string>
+    <string name="are_you_sure_you_want_to_delete_this_item">Are you sure you want to delete this item?</string>
+    <string name="delete_item">Delete Item</string>
+    <string name="image_selection_canceled">image seletion canceled</string>
+    <string name="budget">Budget: $%s</string>
+    <string name="edit_item">Edit Item</string>
+    <string name="do_you_want_to_edit_this_item">Do you want to edit this item?</string>
+    <string name="edit">Edit</string>
+    <string name="item_updated_successfully">Item update successfully</string>
+    <string name="app_db" translatable="false">app_db</string>
+    <string name="budget_2">Budget: $%1$s</string>
+    <string name="budget_3">Budget: $%1$s</string>
+    <string name="welcome_to_your_budget_manager_nhere_you_can_add_your_transactions_and_take_control_of_your_finances">Welcome to your budget manager!\nHere, you can add your transactions and take control of your finances.</string>
 </resources>

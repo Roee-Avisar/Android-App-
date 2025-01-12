@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -5,7 +6,7 @@
     android:orientation="vertical"
     android:padding="20dp"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".UI.fragments.AddItemFragment">
+    tools:context="EditItemFragment">
 
     <RadioGroup
         android:id="@+id/transaction_type_group"
@@ -92,8 +93,6 @@
         android:background="#E0E0E0"
         android:contentDescription="@string/selected_image_placeholder" />
 
-
-
     <Button
         android:id="@+id/confirm_transaction_button"
         android:layout_width="match_parent"
@@ -106,4 +105,14 @@
         android:textColor="#FFFFFF"
         android:padding="12dp" />
 
+    <Button
+        android:id="@+id/cancel_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/cancel"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:backgroundTint="@color/gray"
+        android:textColor="#FFFFFF"
+        android:padding="12dp" />
 </LinearLayout>

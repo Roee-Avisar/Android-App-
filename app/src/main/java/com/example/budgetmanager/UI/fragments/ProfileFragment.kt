@@ -1,7 +1,9 @@
-package com.example.budgetmanager
+package com.example.budgetmanager.UI.fragments
 
+import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -13,15 +15,16 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.findNavController
-import com.example.budgetmanager.Tables.Profile
+import com.bumptech.glide.Glide
+import com.example.budgetmanager.R
 import com.example.budgetmanager.databinding.ProfileLayoutBinding
+import com.example.budgetmanager.UI.viewModel.UserProfileViewModel
 
 class ProfileFragment : Fragment() {
 
     private var _binding: ProfileLayoutBinding? = null
     private val binding get() = _binding!!
-    private val userProfileViewModel: UserProfileModelView by activityViewModels()
+    private val userProfileViewModel: UserProfileViewModel by activityViewModels()
 
 
     override fun onCreateView(
@@ -30,50 +33,52 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         setHasOptionsMenu(true)
+        val isLandscape = resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+        if (isLandscape) {
+            Log.d("ProfileFragment", "Loaded landscape layout")
+        } else {
+            Log.d("ProfileFragment", "Loaded portrait layout")
+        }
+        (activity as? AppCompatActivity)?.supportActionBar?.title = "Budget Manager Profile"
         _binding = ProfileLayoutBinding.inflate(inflater, container, false)
+        (activity as? AppCompatActivity)?.supportActionBar?.setDisplayHomeAsUpEnabled(false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         userProfileViewModel.userProfileLiveData.observe(viewLifecycleOwner) { profile ->
             if (profile != null) {
-                binding.profileName.text = "${profile.firstName} ${profile.lastName}"
-                binding.totalBudgetValue.text = profile.initialBudget.toString()
+                binding.profileName?.text = "${profile.firstName} ${profile.lastName}"
+                binding.totalBudgetValue.text = userProfileViewModel.budgetLiveData.value.toString()
+                binding.expenseValue.text = userProfileViewModel.expensesLiveData.value.toString()
+                binding.incomeValue.text = userProfileViewModel.incomeLiveData.value.toString()
                 if (!profile.imageUri.isNullOrEmpty()) {
-                    binding.profileImage.setImageURI(Uri.parse(profile.imageUri))
+                    Glide.with(binding.root.context)
+                        .load(Uri.parse(profile.imageUri))
+                        .placeholder(R.drawable.ic_launcher_background)
+                        .circleCrop()
+                        .into(binding.profileImage)
                 }
+
             } else {
                 Toast.makeText(
                     requireContext(),
                     getString(R.string.no_profile_found),
                     Toast.LENGTH_SHORT
                 ).show()
-                findNavController().navigate(R.id.createAccountFragment)
-            }
-        }
-        binding.updateBudgetButton.setOnClickListener {
-            val currentBudget = userProfileViewModel.userProfileLiveData.value?.initialBudget
-            if (currentBudget != null) {
-                val bundle = Bundle().apply {
-                    putDouble("currentBudget", currentBudget) // מעביר את התקציב הנוכחי אם קיים
-                }
-                findNavController().navigate(R.id.action_profileFragment_to_addItemFragment, bundle)
-            }else{
-                Toast.makeText(requireContext(),
-                    getString(R.string.no_budget_available), Toast.LENGTH_SHORT).show()
             }
         }
 
-        binding.allItemsBtn.setOnClickListener {
-            findNavController().navigate(R.id.action_profileFragment_to_allItemsFragment)
-        }
 
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {
         val deleteIcon = menu.findItem(R.id.action_delete)
+        val profileIcon = menu.findItem(R.id.action_account)
+        profileIcon.isVisible = false
         deleteIcon.isVisible = false
         super.onPrepareOptionsMenu(menu)
     }
@@ -91,7 +96,6 @@ class ProfileFragment : Fragment() {
                 userProfileViewModel.deleteUserProfile()
                 Toast.makeText(requireContext(), R.string.all_items_deleted, Toast.LENGTH_SHORT).show()
 
-                findNavController().navigate(R.id.createAccountFragment)
             }
             .setNegativeButton(R.string.no, null)
             .show()
@@ -105,6 +109,17 @@ class ProfileFragment : Fragment() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            // העברת נתונים לתצוגת landscape
+            Log.d("ProfileFragment", "Landscape mode detected")
+        } else {
+            // העברת נתונים לתצוגת portrait
+            Log.d("ProfileFragment", "Portrait mode detected")
+        }
     }
 
     override fun onDestroyView() {

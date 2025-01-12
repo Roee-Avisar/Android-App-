@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="20dp"
-    android:background="#F5F5F5"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="ProfileFragment">
+    tools:context=".UI.fragments.ProfileFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -31,10 +30,8 @@
             android:layout_gravity="center"
             android:layout_marginBottom="16dp"
             android:src="@mipmap/ic_launcher_round"
-            android:background="#DDDDDD"
             android:scaleType="centerCrop"
-            android:elevation="4dp"
-            />
+            android:elevation="4dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -86,7 +83,6 @@
                 android:textColor="#4CAF50"
                 android:layout_marginEnd="32dp" />
 
-            <!-- הוצאות -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -105,26 +101,27 @@
                 android:textColor="#F44336" />
         </LinearLayout>
 
-        <Button
-            android:id="@+id/update_budget_button"
+
+        <TextView
+            android:id="@+id/welcome_message"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:backgroundTint="#6495ED"
-            android:padding="12dp"
-            android:text="@string/update_budget"
-            android:textColor="#FFFFFF"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="80dp"
+            android:gravity="center"
+            android:text="@string/welcome_to_your_budget_manager_nhere_you_can_add_your_transactions_and_take_control_of_your_finances"
+            android:textSize="16sp"
             android:textStyle="bold" />
 
-        <Button
-            android:id="@+id/all_items_btn"
+        <ImageView
+            android:id="@+id/graph_image"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:backgroundTint="#6495ED"
-            android:padding="12dp"
-            android:text="@string/watch_all_the_budget_updates"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold" />
+            android:layout_height="200dp"
+            android:layout_marginBottom="16dp"
+            android:scaleType="fitXY"
+            android:alpha="0.5"
+            android:src="@drawable/money_and_graph" />
+
+
     </LinearLayout>
 </ScrollView>
